@@ -1,28 +1,120 @@
-<h1 align="center">🌸 Happy Women's Day 8/3 🌸</h1>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>8/3 - 9A10</title>
 
-<p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?center=true&vCenter=true&width=500&lines=Chúc+mừng+ngày+8%2F3+💖;Chúc+bạn+nữ+đẹp+nhất+thế+giới+🌷;Luôn+xinh+đẹp+và+hạnh+phúc+✨" />
-</p>
-
----
-
-## 💌 Message For You
-
-```javascript
-const specialGirl = {
-  name: "Người con gái đẹp nhất ✨",
-  beauty: "Vô hạn ♾️",
-  smile: "Làm cả thế giới sáng lên ☀️",
-  value: "Không gì có thể thay thế 💎"
-};
-
-function happyWomensDay(person) {
-  return `
-  🌷 Chúc ${person.name} một ngày 8/3 thật rực rỡ!
-  🌸 Luôn xinh đẹp theo cách riêng của bạn.
-  💖 Luôn được yêu thương, trân trọng.
-  ✨ Và mãi là phiên bản tuyệt vời nhất của chính mình.
-  `;
+<style>
+body{
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+    font-family: Arial, sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    text-align:center;
+    color:white;
 }
 
-console.log(happyWomensDay(specialGirl));
+.box{
+    background: rgba(255,255,255,0.15);
+    padding:30px;
+    border-radius:20px;
+    backdrop-filter: blur(10px);
+    animation: fadeIn 2s ease-in-out;
+    z-index:10;
+}
+
+h1{
+    margin-bottom:15px;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform: translateY(20px);}
+    to{opacity:1; transform: translateY(0);}
+}
+
+/* Tim bay */
+.heart{
+    position: absolute;
+    color: #ff3366;
+    font-size:20px;
+    animation: floatUp 5s linear infinite;
+}
+
+@keyframes floatUp{
+    0%{ transform: translateY(100vh) scale(1); opacity:1;}
+    100%{ transform: translateY(-10vh) scale(1.5); opacity:0;}
+}
+
+/* Hoa rơi */
+.flower{
+    position:absolute;
+    top:-10px;
+    font-size:20px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall{
+    0%{ transform: translateY(0);}
+    100%{ transform: translateY(110vh);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h1>🌸 Happy Women's Day 8/3 🌸</h1>
+<p id="message"></p>
+</div>
+
+<!-- Nhạc nền -->
+<audio autoplay loop>
+<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_115b9b8f8b.mp3" type="audio/mp3">
+</audio>
+
+<script>
+const message = `
+💖 Chúc các bạn nữ 9A10 một ngày 8/3 thật rực rỡ!
+
+🌷 Luôn xinh đẹp theo cách riêng của mình.
+📚 Học giỏi, tự tin và đạt được mọi mục tiêu.
+✨ Mỗi ngày đến lớp đều tràn ngập tiếng cười.
+
+Cảm ơn vì đã làm cho 9A10 luôn đặc biệt!
+`;
+
+document.getElementById("message").innerText = message;
+
+/* Tạo tim bay */
+setInterval(()=>{
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.animationDuration = (3 + Math.random()*3) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{ heart.remove(); },5000);
+},300);
+
+/* Tạo hoa rơi */
+setInterval(()=>{
+    const flower = document.createElement("div");
+    flower.classList.add("flower");
+    flower.innerHTML = "🌸";
+    flower.style.left = Math.random()*100 + "vw";
+    flower.style.animationDuration = (5 + Math.random()*5) + "s";
+    document.body.appendChild(flower);
+
+    setTimeout(()=>{ flower.remove(); },10000);
+},500);
+
+</script>
+
+</body>
+</html>
