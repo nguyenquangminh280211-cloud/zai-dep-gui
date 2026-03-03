@@ -2,15 +2,15 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>8/3 - 9A10 FINAL</title>
+<title>8/3 - 9A10 ULTRA</title>
 
 <style>
 body{
     margin:0;
     padding:0;
     overflow:hidden;
-    background: linear-gradient(135deg,#ff9a9e,#fad0c4);
-    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle at center,#ff758c,#ff7eb3,#ff9a9e);
+    font-family:'Segoe UI',sans-serif;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -19,84 +19,69 @@ body{
     color:white;
 }
 
-/* Màn hình mở đầu */
 #startScreen{
     position:fixed;
     inset:0;
-    background: linear-gradient(135deg,#ff758c,#ff7eb3);
+    background:linear-gradient(135deg,#ff4e80,#ff85a1);
     display:flex;
     justify-content:center;
     align-items:center;
-    flex-direction:column;
     z-index:999;
     cursor:pointer;
 }
 
 #startScreen h2{
-    font-size:28px;
+    font-size:32px;
     animation:pulse 1.5s infinite;
 }
 
 @keyframes pulse{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.1);}
-    100%{transform:scale(1);}
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.15);}
 }
 
 .box{
-    background: rgba(255,255,255,0.15);
+    background:rgba(255,255,255,0.15);
     padding:60px;
     border-radius:30px;
-    backdrop-filter: blur(18px);
-    box-shadow: 0 0 40px rgba(255,255,255,0.4);
+    backdrop-filter:blur(18px);
+    box-shadow:0 0 60px rgba(255,255,255,0.6);
     max-width:90%;
     display:none;
 }
 
 h1{
-    font-size:46px;
+    font-size:48px;
     margin-bottom:30px;
-    text-shadow:0 0 20px white;
+    text-shadow:0 0 25px white;
 }
 
 .line{
-    font-size:26px;
-    margin:15px 0;
-    min-height:35px;
-    text-shadow:0 0 12px white;
+    font-size:28px;
+    margin:18px 0;
+    min-height:40px;
+    text-shadow:0 0 15px white;
 }
 
-/* Tim */
-.heart{
+/* ICON BAY */
+.icon{
     position:absolute;
-    font-size:22px;
-    animation: floatUp linear forwards;
-}
-@keyframes floatUp{
-    from{transform:translateY(100vh);opacity:1;}
-    to{transform:translateY(-10vh) scale(1.5);opacity:0;}
+    font-size:28px;
+    animation:float linear forwards;
 }
 
-/* Hoa */
-.flower{
-    position:absolute;
-    top:-10px;
-    font-size:20px;
-    animation: fall linear forwards;
-}
-@keyframes fall{
-    to{transform:translateY(110vh) rotate(360deg);}
+@keyframes float{
+    from{transform:translateY(100vh) rotate(0deg);opacity:1;}
+    to{transform:translateY(-10vh) rotate(720deg);opacity:0;}
 }
 
-/* Pháo hoa */
-.firework{
+/* HẠT PHÁO HOA */
+.particle{
     position:absolute;
-    font-size:30px;
-    animation: explode 1s ease-out forwards;
-}
-@keyframes explode{
-    0%{transform:scale(0);opacity:1;}
-    100%{transform:scale(2);opacity:0;}
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    pointer-events:none;
 }
 </style>
 </head>
@@ -104,12 +89,12 @@ h1{
 <body>
 
 <div id="startScreen">
-    <h2>💖 Bấm vào đây để mở điều đặc biệt 💖</h2>
+<h2>💖 Bấm vào đây để mở điều đặc biệt 💖</h2>
 </div>
 
 <div class="box" id="mainBox">
-    <h1>🌸 Happy Women's Day 8/3 🌸</h1>
-    <div id="message"></div>
+<h1>🌸 Happy Women's Day 8/3 🌸</h1>
+<div id="message"></div>
 </div>
 
 <audio id="bgm" loop>
@@ -117,16 +102,15 @@ h1{
 </audio>
 
 <script>
-const startScreen = document.getElementById("startScreen");
-const box = document.getElementById("mainBox");
-const audio = document.getElementById("bgm");
+const startScreen=document.getElementById("startScreen");
+const box=document.getElementById("mainBox");
+const audio=document.getElementById("bgm");
 
-startScreen.onclick = () => {
+startScreen.onclick=()=>{
     startScreen.style.display="none";
     box.style.display="block";
     audio.volume=0;
-    audio.play();
-    fadeInMusic();
+    audio.play().then(()=>fadeInMusic());
     showLines(0);
 };
 
@@ -145,7 +129,7 @@ const lines=[
 "🌷 Luôn xinh đẹp theo cách riêng của mình.",
 "📚 Học giỏi, tự tin và đạt được mọi mục tiêu.",
 "✨ Mỗi ngày đến lớp đều tràn ngập tiếng cười.",
-"💌 From 9A10 Boys."
+"💞💓💗💖🎉💯🎊🌟🌷🌹🪷🌸🍁🌻🐱"
 ];
 
 const container=document.getElementById("message");
@@ -166,48 +150,72 @@ function typeWriter(text,element,speed,callback){
 
 function showLines(index){
     if(index>=lines.length){
-        launchFireworks();
+        launchHeartFireworks();
         return;
     }
     const p=document.createElement("div");
     p.classList.add("line");
     container.appendChild(p);
-    typeWriter(lines[index],p,35,()=>showLines(index+1));
+    typeWriter(lines[index],p,30,()=>showLines(index+1));
 }
 
-/* Tim + Hoa */
-setInterval(()=>{
-    const heart=document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML="💖";
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.animationDuration=(4+Math.random()*3)+"s";
-    document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(),7000);
-},400);
+/* ICON BAY */
+const icons=["✨","💞","💓","💗","💖","🎉","💯","🎊","🌟","🌷","🌹","🪷","🌸","🍁","🌻","🐱"];
 
 setInterval(()=>{
-    const flower=document.createElement("div");
-    flower.classList.add("flower");
-    flower.innerHTML="🌸";
-    flower.style.left=Math.random()*100+"vw";
-    flower.style.animationDuration=(6+Math.random()*4)+"s";
-    document.body.appendChild(flower);
-    setTimeout(()=>flower.remove(),10000);
-},600);
+    const el=document.createElement("div");
+    el.classList.add("icon");
+    el.innerHTML=icons[Math.floor(Math.random()*icons.length)];
+    el.style.left=Math.random()*100+"vw";
+    el.style.animationDuration=(4+Math.random()*4)+"s";
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),8000);
+},250);
 
-/* Pháo hoa */
-function launchFireworks(){
+/* 💖 PHÁO HOA HÌNH TRÁI TIM ULTRA */
+function createHeartFirework(){
+
+    const colors=["#ff2e63","#ff4e80","#ff99cc","#ff0066","#ffffff","#ffd1dc"];
+
+    const centerX=Math.random()*window.innerWidth;
+    const centerY=Math.random()*(window.innerHeight/2);
+
+    const scale=12;
+
+    for(let t=0;t<Math.PI*2;t+=0.15){
+
+        const x=scale*16*Math.pow(Math.sin(t),3);
+        const y=-scale*(13*Math.cos(t)
+            -5*Math.cos(2*t)
+            -2*Math.cos(3*t)
+            -Math.cos(4*t));
+
+        const particle=document.createElement("div");
+        particle.classList.add("particle");
+        particle.style.background=
+            colors[Math.floor(Math.random()*colors.length)];
+        particle.style.left=centerX+"px";
+        particle.style.top=centerY+"px";
+
+        document.body.appendChild(particle);
+
+        particle.animate([
+            {transform:"translate(0,0)",opacity:1},
+            {transform:`translate(${x}px,${y}px)`,opacity:0}
+        ],{
+            duration:1500,
+            easing:"ease-out"
+        });
+
+        setTimeout(()=>particle.remove(),1500);
+    }
+}
+
+function launchHeartFireworks(){
     for(let i=0;i<20;i++){
         setTimeout(()=>{
-            const fw=document.createElement("div");
-            fw.classList.add("firework");
-            fw.innerHTML="✨";
-            fw.style.left=Math.random()*100+"vw";
-            fw.style.top=Math.random()*100+"vh";
-            document.body.appendChild(fw);
-            setTimeout(()=>fw.remove(),1000);
-        },i*200);
+            createHeartFirework();
+        },i*500);
     }
 }
 </script>
