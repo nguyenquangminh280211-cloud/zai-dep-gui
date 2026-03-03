@@ -2,12 +2,11 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>8/3 - 9A10 ULTRA</title>
+<title>8/3 - 9A10 SMOOTH</title>
 
 <style>
 body{
     margin:0;
-    padding:0;
     overflow:hidden;
     background: radial-gradient(circle at center,#ff758c,#ff7eb3,#ff9a9e);
     font-family:'Segoe UI',sans-serif;
@@ -19,6 +18,7 @@ body{
     color:white;
 }
 
+/* START */
 #startScreen{
     position:fixed;
     inset:0;
@@ -31,55 +31,53 @@ body{
 }
 
 #startScreen h2{
-    font-size:32px;
+    font-size:28px;
     animation:pulse 1.5s infinite;
 }
 
 @keyframes pulse{
-    0%,100%{transform:scale(1);}
-    50%{transform:scale(1.15);}
+    50%{transform:scale(1.1);}
 }
 
+/* BOX */
 .box{
-    background:rgba(255,255,255,0.15);
-    padding:60px;
-    border-radius:30px;
-    backdrop-filter:blur(18px);
-    box-shadow:0 0 60px rgba(255,255,255,0.6);
+    background:rgba(255,255,255,0.18);
+    padding:50px;
+    border-radius:25px;
+    box-shadow:0 0 30px rgba(255,255,255,0.4);
     max-width:90%;
     display:none;
 }
 
 h1{
-    font-size:48px;
-    margin-bottom:30px;
-    text-shadow:0 0 25px white;
+    font-size:40px;
+    margin-bottom:25px;
 }
 
 .line{
-    font-size:28px;
-    margin:18px 0;
-    min-height:40px;
-    text-shadow:0 0 15px white;
+    font-size:24px;
+    margin:15px 0;
+    min-height:35px;
 }
 
-/* ICON BAY */
+/* ICON BAY MƯỢT */
 .icon{
     position:absolute;
-    font-size:28px;
+    font-size:24px;
     animation:float linear forwards;
+    will-change:transform;
 }
 
 @keyframes float{
-    from{transform:translateY(100vh) rotate(0deg);opacity:1;}
-    to{transform:translateY(-10vh) rotate(720deg);opacity:0;}
+    from{transform:translateY(100vh);}
+    to{transform:translateY(-10vh);}
 }
 
-/* HẠT PHÁO HOA */
+/* HẠT PHÁO */
 .particle{
     position:absolute;
-    width:8px;
-    height:8px;
+    width:6px;
+    height:6px;
     border-radius:50%;
     pointer-events:none;
 }
@@ -89,7 +87,7 @@ h1{
 <body>
 
 <div id="startScreen">
-<h2>💖 Bấm vào đây để mở điều đặc biệt 💖</h2>
+<h2>💖 Bấm để mở 💖</h2>
 </div>
 
 <div class="box" id="mainBox">
@@ -109,27 +107,17 @@ const audio=document.getElementById("bgm");
 startScreen.onclick=()=>{
     startScreen.style.display="none";
     box.style.display="block";
-    audio.volume=0;
-    audio.play().then(()=>fadeInMusic());
+    audio.volume=0.2;
+    audio.play();
     showLines(0);
 };
 
-function fadeInMusic(){
-    let vol=0;
-    const fade=setInterval(()=>{
-        if(vol<1){
-            vol+=0.05;
-            audio.volume=vol;
-        }else clearInterval(fade);
-    },200);
-}
-
+/* TEXT */
 const lines=[
 "💖 Chúc các bạn nữ 9A10 một ngày 8/3 thật rực rỡ!",
 "🌷 Luôn xinh đẹp theo cách riêng của mình.",
 "📚 Học giỏi, tự tin và đạt được mọi mục tiêu.",
-"✨ Mỗi ngày đến lớp đều tràn ngập tiếng cười.",
-"💞💓💗💖🎉💯🎊🌟🌷🌹🪷🌸🍁🌻🐱"
+"✨ Mỗi ngày đến lớp đều tràn ngập tiếng cười."
 ];
 
 const container=document.getElementById("message");
@@ -142,7 +130,7 @@ function typeWriter(text,element,speed,callback){
             i++;
             setTimeout(typing,speed);
         }else if(callback){
-            setTimeout(callback,600);
+            setTimeout(callback,500);
         }
     }
     typing();
@@ -156,69 +144,13 @@ function showLines(index){
     const p=document.createElement("div");
     p.classList.add("line");
     container.appendChild(p);
-    typeWriter(lines[index],p,30,()=>showLines(index+1));
+    typeWriter(lines[index],p,25,()=>showLines(index+1));
 }
 
-/* ICON BAY */
+/* ICON BAY NHIỀU NHƯNG NHẸ */
 const icons=["✨","💞","💓","💗","💖","🎉","💯","🎊","🌟","🌷","🌹","🪷","🌸","🍁","🌻","🐱"];
 
 setInterval(()=>{
-    const el=document.createElement("div");
-    el.classList.add("icon");
-    el.innerHTML=icons[Math.floor(Math.random()*icons.length)];
-    el.style.left=Math.random()*100+"vw";
-    el.style.animationDuration=(4+Math.random()*4)+"s";
-    document.body.appendChild(el);
-    setTimeout(()=>el.remove(),8000);
-},250);
-
-/* 💖 PHÁO HOA HÌNH TRÁI TIM ULTRA */
-function createHeartFirework(){
-
-    const colors=["#ff2e63","#ff4e80","#ff99cc","#ff0066","#ffffff","#ffd1dc"];
-
-    const centerX=Math.random()*window.innerWidth;
-    const centerY=Math.random()*(window.innerHeight/2);
-
-    const scale=12;
-
-    for(let t=0;t<Math.PI*2;t+=0.15){
-
-        const x=scale*16*Math.pow(Math.sin(t),3);
-        const y=-scale*(13*Math.cos(t)
-            -5*Math.cos(2*t)
-            -2*Math.cos(3*t)
-            -Math.cos(4*t));
-
-        const particle=document.createElement("div");
-        particle.classList.add("particle");
-        particle.style.background=
-            colors[Math.floor(Math.random()*colors.length)];
-        particle.style.left=centerX+"px";
-        particle.style.top=centerY+"px";
-
-        document.body.appendChild(particle);
-
-        particle.animate([
-            {transform:"translate(0,0)",opacity:1},
-            {transform:`translate(${x}px,${y}px)`,opacity:0}
-        ],{
-            duration:1500,
-            easing:"ease-out"
-        });
-
-        setTimeout(()=>particle.remove(),1500);
-    }
-}
-
-function launchHeartFireworks(){
-    for(let i=0;i<20;i++){
-        setTimeout(()=>{
-            createHeartFirework();
-        },i*500);
-    }
-}
-</script>
-
-</body>
-</html>
+    for(let i=0;i<3;i++){   // mỗi lần tạo 3 icon
+        const el=document.createElement("div");
+        el.class
