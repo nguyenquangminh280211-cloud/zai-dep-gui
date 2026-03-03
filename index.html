@@ -1,106 +1,28 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="UTF-8">
-<title>Merry Christmas</title>
+<h1 align="center">🌸 Happy Women's Day 8/3 🌸</h1>
 
-<style>
-body{
-    margin:0;
-    background:black;
-    overflow:hidden;
-    color:white;
-    font-family: Arial, sans-serif;
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?center=true&vCenter=true&width=500&lines=Chúc+mừng+ngày+8%2F3+💖;Chúc+bạn+nữ+đẹp+nhất+thế+giới+🌷;Luôn+xinh+đẹp+và+hạnh+phúc+✨" />
+</p>
+
+---
+
+## 💌 Message For You
+
+```javascript
+const specialGirl = {
+  name: "Người con gái đẹp nhất ✨",
+  beauty: "Vô hạn ♾️",
+  smile: "Làm cả thế giới sáng lên ☀️",
+  value: "Không gì có thể thay thế 💎"
+};
+
+function happyWomensDay(person) {
+  return `
+  🌷 Chúc ${person.name} một ngày 8/3 thật rực rỡ!
+  🌸 Luôn xinh đẹp theo cách riêng của bạn.
+  💖 Luôn được yêu thương, trân trọng.
+  ✨ Và mãi là phiên bản tuyệt vời nhất của chính mình.
+  `;
 }
 
-.text{
-    position:absolute;
-    top:40%;
-    width:100%;
-    text-align:center;
-    font-size:30px;
-    opacity:0;
-    line-height:1.4;
-}
-
-/* wish chung */
-#wish1{
-    animation: showThenHide 5s forwards;
-    animation-delay:1s;
-}
-
-/* lời chúc riêng */
-#wish2{
-    animation: fadeIn 4s forwards;
-    animation-delay:7s;
-}
-
-@keyframes showThenHide{
-    0%{opacity:0;}
-    20%{opacity:1;}
-    80%{opacity:1;}
-    100%{opacity:0;}
-}
-
-@keyframes fadeIn{
-    to{opacity:1;}
-}
-
-/* icon rơi */
-.icon{
-    position:absolute;
-    top:-40px;
-    font-size:26px;
-    animation: fall linear infinite;
-}
-
-@keyframes fall{
-    to{ transform: translateY(110vh); }
-}
-</style>
-</head>
-
-<body>
-
-<!-- 🎵 NHẠC: AUTOPLAY + MUTED -->
-<audio id="music" autoplay loop muted>
-    <source src="https://files.catbox.moe/4j6q7k.mp3" type="audio/mpeg">
-</audio>
-
-<!-- wish chung -->
-<div id="wish1" class="text">
-    Wish you a warm and gentle winter ❄️
-</div>
-
-<!-- lời chúc Minh → Thư -->
-<div id="wish2" class="text">
-    Noel này Minh chúc Thư luôn bình yên 💛<br>
-    Giữa những ngày đông lạnh,<br>
-    mong là Thư vẫn có<br>
-    một điều gì đó đủ ấm để mỉm cười 🌲
-</div>
-
-<script>
-/* icon rơi */
-const icons = ["💛","❄️","🌲"];
-for(let i=0;i<45;i++){
-    let span = document.createElement("span");
-    span.className="icon";
-    span.innerText = icons[Math.floor(Math.random()*icons.length)];
-    span.style.left = Math.random()*100 + "vw";
-    span.style.animationDuration = (4 + Math.random()*6) + "s";
-    document.body.appendChild(span);
-}
-
-/* tự unmute sau khi load */
-window.addEventListener("load", ()=>{
-    const music = document.getElementById("music");
-    setTimeout(()=>{
-        music.muted = false;
-        music.volume = 0.6;
-    }, 500);
-});
-</script>
-
-</body>
-</html>
+console.log(happyWomensDay(specialGirl));
