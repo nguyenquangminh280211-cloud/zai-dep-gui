@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>8/3 - 9A10 SMOOTH</title>
+<title>8/3 - 9A10 </title>
 
 <style>
 body{
@@ -18,7 +18,7 @@ body{
     color:white;
 }
 
-/* START */
+/* ===== START SCREEN ===== */
 #startScreen{
     position:fixed;
     inset:0;
@@ -27,24 +27,69 @@ body{
     justify-content:center;
     align-items:center;
     z-index:999;
+}
+
+/* KHUNG KÍNH */
+.startBox{
+    position:relative;
+    background:rgba(255,255,255,0.25);
+    padding:50px 70px;
+    border-radius:30px;
+    backdrop-filter:blur(15px);
+    box-shadow:0 0 40px rgba(255,255,255,0.6);
     cursor:pointer;
+    transition:0.3s;
 }
 
-#startScreen h2{
-    font-size:28px;
-    animation:pulse 1.5s infinite;
+.startBox:hover{
+    animation:shake 0.3s infinite;
 }
 
-@keyframes pulse{
-    50%{transform:scale(1.1);}
+@keyframes shake{
+    25%{transform:translateX(-2px);}
+    50%{transform:translateX(2px);}
+    75%{transform:translateX(-2px);}
 }
 
-/* BOX */
+/* TIM ĐẬP */
+.heartBeat{
+    position:absolute;
+    font-size:22px;
+    animation:beat 1.2s infinite;
+}
+
+@keyframes beat{
+    50%{transform:scale(1.4);}
+}
+
+/* ICON BAY SAU KHUNG */
+.bgIcon{
+    position:absolute;
+    font-size:24px;
+    animation:float linear forwards;
+    opacity:0.7;
+}
+
+@keyframes float{
+    from{transform:translateY(100vh);}
+    to{transform:translateY(-10vh);}
+}
+
+/* HIỆU ỨNG VỠ */
+.break{
+    animation:explodeBox 0.6s forwards;
+}
+
+@keyframes explodeBox{
+    100%{transform:scale(1.8) rotate(15deg);opacity:0;}
+}
+
+/* ===== MAIN BOX ===== */
 .box{
     background:rgba(255,255,255,0.18);
     padding:50px;
     border-radius:25px;
-    box-shadow:0 0 30px rgba(255,255,255,0.4);
+    box-shadow:0 0 25px rgba(255,255,255,0.4);
     max-width:90%;
     display:none;
 }
@@ -60,20 +105,7 @@ h1{
     min-height:35px;
 }
 
-/* ICON BAY MƯỢT */
-.icon{
-    position:absolute;
-    font-size:24px;
-    animation:float linear forwards;
-    will-change:transform;
-}
-
-@keyframes float{
-    from{transform:translateY(100vh);}
-    to{transform:translateY(-10vh);}
-}
-
-/* HẠT PHÁO */
+/* PARTICLE PHÁO HOA */
 .particle{
     position:absolute;
     width:6px;
@@ -86,33 +118,53 @@ h1{
 
 <body>
 
+<!-- START -->
 <div id="startScreen">
-<h2>💖 Bấm để mở 💖</h2>
+    <div class="startBox" id="startBox">
+        <h2>💖 Bấm để mở điều đặc biệt 💖</h2>
+
+        <div class="heartBeat" style="top:-15px;left:-15px;">💖</div>
+        <div class="heartBeat" style="top:-15px;right:-15px;">💞</div>
+        <div class="heartBeat" style="bottom:-15px;left:-15px;">💓</div>
+        <div class="heartBeat" style="bottom:-15px;right:-15px;">💗</div>
+    </div>
 </div>
 
+<!-- MAIN -->
 <div class="box" id="mainBox">
 <h1>🌸 Happy Women's Day 8/3 🌸</h1>
 <div id="message"></div>
 </div>
 
-<audio id="bgm" loop>
-<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_115b9b8f8b.mp3" type="audio/mp3">
-</audio>
-
 <script>
 const startScreen=document.getElementById("startScreen");
-const box=document.getElementById("mainBox");
-const audio=document.getElementById("bgm");
+const startBox=document.getElementById("startBox");
+const mainBox=document.getElementById("mainBox");
 
-startScreen.onclick=()=>{
-    startScreen.style.display="none";
-    box.style.display="block";
-    audio.volume=0.2;
-    audio.play();
-    showLines(0);
+/* ICON BAY SAU KHUNG */
+const icons=["✨","💞","💓","💗","💖","🎉","🎊","🌟","🌷","🌹","🌸","🌻"];
+
+setInterval(()=>{
+    const el=document.createElement("div");
+    el.classList.add("bgIcon");
+    el.innerHTML=icons[Math.floor(Math.random()*icons.length)];
+    el.style.left=Math.random()*100+"vw";
+    el.style.animationDuration=(5+Math.random()*3)+"s";
+    startScreen.appendChild(el);
+    setTimeout(()=>el.remove(),8000);
+},500);
+
+/* CLICK */
+startBox.onclick=()=>{
+    startBox.classList.add("break");
+    setTimeout(()=>{
+        startScreen.style.display="none";
+        mainBox.style.display="block";
+        showLines(0);
+    },600);
 };
 
-/* TEXT */
+/* ===== TEXT TYPING ===== */
 const lines=[
 "💖 Chúc các bạn nữ 9A10 một ngày 8/3 thật rực rỡ!",
 "🌷 Luôn xinh đẹp theo cách riêng của mình.",
@@ -147,10 +199,50 @@ function showLines(index){
     typeWriter(lines[index],p,25,()=>showLines(index+1));
 }
 
-/* ICON BAY NHIỀU NHƯNG NHẸ */
-const icons=["✨","💞","💓","💗","💖","🎉","💯","🎊","🌟","🌷","🌹","🪷","🌸","🍁","🌻","🐱"];
+/* ===== PHÁO HOA TIM ===== */
+function createHeartFirework(){
+    const colors=["#ff2e63","#ff4e80","#ff99cc","#ffffff"];
+    const centerX=Math.random()*window.innerWidth;
+    const centerY=Math.random()*(window.innerHeight/2);
+    const scale=10;
 
-setInterval(()=>{
-    for(let i=0;i<3;i++){   // mỗi lần tạo 3 icon
-        const el=document.createElement("div");
-        el.class
+    for(let t=0;t<Math.PI*2;t+=0.25){
+        const x=scale*16*Math.pow(Math.sin(t),3);
+        const y=-scale*(13*Math.cos(t)
+            -5*Math.cos(2*t)
+            -2*Math.cos(3*t)
+            -Math.cos(4*t));
+
+        const particle=document.createElement("div");
+        particle.classList.add("particle");
+        particle.style.background=
+            colors[Math.floor(Math.random()*colors.length)];
+        particle.style.left=centerX+"px";
+        particle.style.top=centerY+"px";
+
+        document.body.appendChild(particle);
+
+        particle.animate([
+            {transform:"translate(0,0)",opacity:1},
+            {transform:`translate(${x}px,${y}px)`,opacity:0}
+        ],{
+            duration:1200,
+            easing:"ease-out"
+        });
+
+        setTimeout(()=>particle.remove(),1200);
+    }
+}
+
+function launchHeartFireworks(){
+    let count=0;
+    const interval=setInterval(()=>{
+        createHeartFirework();
+        count++;
+        if(count>12) clearInterval(interval);
+    },700);
+}
+</script>
+
+</body>
+</html>
