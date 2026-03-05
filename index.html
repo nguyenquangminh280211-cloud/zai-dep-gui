@@ -5,295 +5,355 @@
 <title>8/3 - 9A10 FINAL BOSS</title>
 
 <style>
+
 body{
-    margin:0;
-    overflow:hidden;
-    background: radial-gradient(circle at center,#ff758c,#ff7eb3,#ff9a9e);
-    font-family:'Segoe UI',sans-serif;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    text-align:center;
-    color:white;
+margin:0;
+overflow:hidden;
+background: radial-gradient(circle at center,#ff758c,#ff7eb3,#ff9a9e);
+font-family:'Segoe UI',sans-serif;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+text-align:center;
+color:white;
 }
 
-/* ===== ICON RƠI ===== */
-.fallIcon{
-    position:fixed;
-    top:-40px;
-    font-size:22px;
-    animation:fall linear forwards;
-    pointer-events:none;
-    opacity:0.9;
-}
+/* START SCREEN */
 
-@keyframes fall{
-    to{
-        transform:translateY(110vh) rotate(360deg);
-        opacity:0;
-    }
-}
-
-/* ===== START SCREEN ===== */
 #startScreen{
-    position:fixed;
-    inset:0;
-    background:linear-gradient(135deg,#ff4e80,#ff85a1);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:999;
+position:fixed;
+inset:0;
+background:linear-gradient(135deg,#ff4e80,#ff85a1);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:999;
 }
 
-/* KHUNG KÍNH */
 .startBox{
-    position:relative;
-    background:rgba(255,255,255,0.25);
-    padding:50px 70px;
-    border-radius:30px;
-    backdrop-filter:blur(15px);
-    box-shadow:0 0 40px rgba(255,255,255,0.6);
-    cursor:pointer;
-    transition:0.3s;
+position:relative;
+background:rgba(255,255,255,0.25);
+padding:50px 70px;
+border-radius:30px;
+backdrop-filter:blur(15px);
+box-shadow:0 0 40px rgba(255,255,255,0.6);
+cursor:pointer;
+transition:0.3s;
 }
 
 .startBox:hover{
-    animation:shake 0.3s infinite;
+animation:shake 0.3s infinite;
 }
 
 @keyframes shake{
-    25%{transform:translateX(-2px);}
-    50%{transform:translateX(2px);}
-    75%{transform:translateX(-2px);}
+25%{transform:translateX(-2px);}
+50%{transform:translateX(2px);}
+75%{transform:translateX(-2px);}
 }
 
-/* TIM ĐẬP */
 .heartBeat{
-    position:absolute;
-    font-size:22px;
-    animation:beat 1.2s infinite;
+position:absolute;
+font-size:22px;
+animation:beat 1.2s infinite;
 }
 
 @keyframes beat{
-    50%{transform:scale(1.4);}
+50%{transform:scale(1.4);}
 }
 
-/* ICON BAY SAU KHUNG */
-.bgIcon{
-    position:absolute;
-    font-size:24px;
-    animation:float linear forwards;
-    opacity:0.7;
-}
+/* KHUNG CHÍNH */
 
-@keyframes float{
-    from{transform:translateY(100vh);}
-    to{transform:translateY(-10vh);}
-}
-
-/* HIỆU ỨNG VỠ */
-.break{
-    animation:explodeBox 0.6s forwards;
-}
-
-@keyframes explodeBox{
-    100%{transform:scale(1.8) rotate(15deg);opacity:0;}
-}
-
-/* ===== MAIN BOX ===== */
 .box{
-    background:rgba(255,255,255,0.18);
-    padding:50px;
-    border-radius:25px;
-    box-shadow:0 0 25px rgba(255,255,255,0.4);
-    max-width:90%;
-    display:none;
+background:rgba(255,255,255,0.18);
+padding:50px;
+border-radius:25px;
+box-shadow:0 0 25px rgba(255,255,255,0.4);
+max-width:90%;
+display:none;
 }
 
 h1{
-    font-size:40px;
-    margin-bottom:25px;
+font-size:40px;
+margin-bottom:25px;
 }
 
 .line{
-    font-size:24px;
-    margin:15px 0;
-    min-height:35px;
+font-size:24px;
+margin:15px 0;
+min-height:35px;
+}
+
+/* ICON RƠI */
+
+.fallIcon{
+position:absolute;
+top:-50px;
+pointer-events:none;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+to{
+transform:translateY(110vh) rotate(720deg);
+}
 }
 
 /* PARTICLE PHÁO HOA */
+
 .particle{
-    position:absolute;
-    width:6px;
-    height:6px;
-    border-radius:50%;
-    pointer-events:none;
+position:absolute;
+width:6px;
+height:6px;
+border-radius:50%;
+pointer-events:none;
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- START -->
 <div id="startScreen">
-    <div class="startBox" id="startBox">
-        <h2>💖 Bấm để mở điều đặc biệt 💖</h2>
 
-        <div class="heartBeat" style="top:-15px;left:-15px;">💖</div>
-        <div class="heartBeat" style="top:-15px;right:-15px;">💞</div>
-        <div class="heartBeat" style="bottom:-15px;left:-15px;">💓</div>
-        <div class="heartBeat" style="bottom:-15px;right:-15px;">💗</div>
-    </div>
+<div class="startBox" id="startBox">
+
+<h2>💖 Bấm để mở điều đặc biệt 💖</h2>
+
+<div class="heartBeat" style="top:-15px;left:-15px;">💖</div>
+<div class="heartBeat" style="top:-15px;right:-15px;">💞</div>
+<div class="heartBeat" style="bottom:-15px;left:-15px;">💓</div>
+<div class="heartBeat" style="bottom:-15px;right:-15px;">💗</div>
+
 </div>
 
-<!-- MAIN -->
+</div>
+
 <div class="box" id="mainBox">
+
 <h1>🌸 Happy Women's Day 8/3 🌸</h1>
+
 <div id="message"></div>
+
 </div>
 
 <script>
-const startScreen=document.getElementById("startScreen");
-const startBox=document.getElementById("startBox");
-const mainBox=document.getElementById("mainBox");
 
-const icons=["✨","💞","💓","💗","💖","🎉","🎊","🌟","🌷","🌹","🌸","🌻","🐱","🍁"];
+/* ICON LIST */
 
-/* ICON BAY SAU KHUNG */
-setInterval(()=>{
-    const el=document.createElement("div");
-    el.classList.add("bgIcon");
-    el.innerHTML=icons[Math.floor(Math.random()*icons.length)];
-    el.style.left=Math.random()*100+"vw";
-    el.style.animationDuration=(5+Math.random()*3)+"s";
-    startScreen.appendChild(el);
-    setTimeout(()=>el.remove(),8000);
-},500);
+const icons=["💓","💞","💖","💗","🎉","💯","🎊","🌟","✨","🌷","🌹","🪷","🌸","🍁","🌻","🐱"];
 
-/* ICON RƠI */
+/* ICON RƠI 3 LAYER */
+
 function startFallingIcons(){
-    setInterval(()=>{
-        const el=document.createElement("div");
-        el.classList.add("fallIcon");
-        el.innerHTML=icons[Math.floor(Math.random()*icons.length)];
-        el.style.left=Math.random()*100+"vw";
-        el.style.animationDuration=(4+Math.random()*3)+"s";
-        document.body.appendChild(el);
-        setTimeout(()=>el.remove(),7000);
-    },300);
+
+setInterval(()=>{
+
+for(let i=0;i<6;i++){
+
+const el=document.createElement("div");
+
+el.classList.add("fallIcon");
+
+el.innerHTML=icons[Math.floor(Math.random()*icons.length)];
+
+el.style.left=Math.random()*100+"vw";
+
+/* layer xa */
+if(Math.random()<0.33){
+el.style.fontSize="16px";
+el.style.animationDuration="7s";
 }
 
-/* CLICK */
+/* layer trung */
+else if(Math.random()<0.66){
+el.style.fontSize="22px";
+el.style.animationDuration="5s";
+}
+
+/* layer gần */
+else{
+el.style.fontSize="30px";
+el.style.animationDuration="4s";
+}
+
+document.body.appendChild(el);
+
+setTimeout(()=>el.remove(),8000);
+
+}
+
+},120)
+
+}
+
+startFallingIcons();
+
+/* START CLICK */
+
+const startBox=document.getElementById("startBox");
+const startScreen=document.getElementById("startScreen");
+const mainBox=document.getElementById("mainBox");
+
 startBox.onclick=()=>{
-    startBox.classList.add("break");
-    startFallingIcons();
 
-    setTimeout(()=>{
-        startScreen.style.display="none";
-        mainBox.style.display="block";
-        showLines(0);
-    },600);
-};
+startBox.style.transform="scale(1.6) rotate(10deg)";
+startBox.style.opacity="0";
 
-/* ===== TEXT ===== */
+setTimeout(()=>{
+
+startScreen.style.display="none";
+mainBox.style.display="block";
+showLines(0);
+
+},600)
+
+}
+
+/* LỜI CHÚC */
+
 const lines=[
+
 "💖 Chúc các bạn nữ 9A10 một ngày 8/3 thật rực rỡ!",
-"🌸 Luôn xinh đẹp và tỏa sáng theo cách riêng.",
-"🌷 Mỗi ngày đến lớp đều tràn ngập tiếng cười.",
-"✨ Chúc các bạn luôn vui vẻ và hạnh phúc.",
-"🌹 Học giỏi hơn mỗi ngày và đạt nhiều thành tích tốt.",
-"💞 Luôn tự tin với chính mình.",
-"🌸 Chúc các bạn luôn mạnh mẽ và bản lĩnh.",
-"🌷 Mong rằng mọi ước mơ đều sẽ thành hiện thực.",
-"✨ Cuộc sống luôn đầy màu sắc và niềm vui.",
-"🌻 Chúc các bạn luôn được yêu thương.",
-"💗 Luôn giữ nụ cười trên môi mỗi ngày.",
-"🌸 Học tập thật tốt và đạt điểm cao.",
-"🌹 Luôn gặp nhiều may mắn trong cuộc sống.",
-"🌷 Mỗi ngày đều là một ngày thật đẹp.",
-"✨ Chúc các bạn luôn tràn đầy năng lượng.",
-"💞 Luôn vui vẻ bên bạn bè và gia đình.",
-"🌸 Có thật nhiều kỷ niệm đẹp tuổi học trò.",
-"🌻 Luôn tự tin bước tới tương lai.",
-"🌷 Chúc mọi điều tốt đẹp sẽ đến với các bạn.",
-"💗 Mãi luôn xinh đẹp và đáng yêu.",
-"🌸 Hy vọng mỗi ngày đều là một ngày vui.",
-"✨ Chúc các bạn luôn đạt được điều mình mong muốn.",
-"🌹 Thanh xuân thật rực rỡ và đáng nhớ.",
-"💖 Happy Women's Day 8/3!"
-];
+"🌸 Chúc các bạn luôn xinh đẹp theo cách riêng của mình.",
+"✨ Chúc mỗi ngày đến lớp đều tràn ngập tiếng cười.",
+"📚 Chúc các bạn học thật giỏi và đạt nhiều thành tích.",
+"🌷 Chúc luôn tự tin và tỏa sáng.",
+"💞 Chúc luôn gặp nhiều may mắn trong cuộc sống.",
+"🌻 Chúc mọi ước mơ đều trở thành sự thật.",
+"🌹 Chúc các bạn luôn được yêu thương.",
+"💓 Chúc tuổi trẻ thật rực rỡ.",
+"✨ Chúc luôn vui vẻ và hạnh phúc.",
+"🌸 Chúc mỗi ngày đều là một ngày đẹp trời.",
+"🌷 Chúc tình bạn lớp 9A10 mãi bền lâu.",
+"🌻 Chúc luôn mạnh mẽ và kiên cường.",
+"💖 Chúc các bạn luôn tỏa sáng theo cách riêng.",
+"🌹 Chúc cuộc sống luôn ngập tràn niềm vui.",
+"🌸 Chúc mọi điều tốt đẹp sẽ đến.",
+"✨ Chúc tương lai thật rực rỡ.",
+"🌷 Chúc thanh xuân thật đáng nhớ.",
+"💞 Chúc luôn giữ nụ cười trên môi.",
+"🌻 Chúc luôn hạnh phúc.",
+"💖 Happy Women's Day!"
+
+]
 
 const container=document.getElementById("message");
 
+/* TYPE WRITER */
+
 function typeWriter(text,element,speed,callback){
-    let i=0;
-    function typing(){
-        if(i<text.length){
-            element.innerHTML+=text.charAt(i);
-            i++;
-            setTimeout(typing,speed);
-        }else if(callback){
-            setTimeout(callback,400);
-        }
-    }
-    typing();
+
+let i=0;
+
+function typing(){
+
+if(i<text.length){
+
+element.innerHTML+=text.charAt(i);
+
+i++;
+
+setTimeout(typing,speed);
+
+}
+
+else if(callback){
+
+setTimeout(callback,500);
+
+}
+
+}
+
+typing();
+
 }
 
 function showLines(index){
-    if(index>=lines.length){
-        launchHeartFireworks();
-        return;
-    }
-    const p=document.createElement("div");
-    p.classList.add("line");
-    container.appendChild(p);
-    typeWriter(lines[index],p,25,()=>showLines(index+1));
+
+if(index>=lines.length){
+
+launchHeartFireworks();
+
+return;
+
 }
 
-/* ===== PHÁO HOA TIM ===== */
+const p=document.createElement("div");
+
+p.classList.add("line");
+
+container.appendChild(p);
+
+typeWriter(lines[index],p,25,()=>showLines(index+1));
+
+}
+
+/* PHÁO HOA TRÁI TIM */
+
 function createHeartFirework(){
-    const colors=["#ff2e63","#ff4e80","#ff99cc","#ffffff"];
-    const centerX=Math.random()*window.innerWidth;
-    const centerY=Math.random()*(window.innerHeight/2);
-    const scale=10;
 
-    for(let t=0;t<Math.PI*2;t+=0.25){
-        const x=scale*16*Math.pow(Math.sin(t),3);
-        const y=-scale*(13*Math.cos(t)
-            -5*Math.cos(2*t)
-            -2*Math.cos(3*t)
-            -Math.cos(4*t));
+const colors=["#ff2e63","#ff4e80","#ff99cc","#ffffff"];
 
-        const particle=document.createElement("div");
-        particle.classList.add("particle");
-        particle.style.background=
-            colors[Math.floor(Math.random()*colors.length)];
-        particle.style.left=centerX+"px";
-        particle.style.top=centerY+"px";
+const centerX=Math.random()*window.innerWidth;
 
-        document.body.appendChild(particle);
+const centerY=Math.random()*(window.innerHeight/2);
 
-        particle.animate([
-            {transform:"translate(0,0)",opacity:1},
-            {transform:`translate(${x}px,${y}px)`,opacity:0}
-        ],{
-            duration:1200,
-            easing:"ease-out"
-        });
+const scale=10;
 
-        setTimeout(()=>particle.remove(),1200);
-    }
+for(let t=0;t<Math.PI*2;t+=0.25){
+
+const x=scale*16*Math.pow(Math.sin(t),3);
+
+const y=-scale*(13*Math.cos(t)
+-5*Math.cos(2*t)
+-2*Math.cos(3*t)
+-Math.cos(4*t));
+
+const particle=document.createElement("div");
+
+particle.classList.add("particle");
+
+particle.style.background=
+colors[Math.floor(Math.random()*colors.length)];
+
+particle.style.left=centerX+"px";
+
+particle.style.top=centerY+"px";
+
+document.body.appendChild(particle);
+
+particle.animate([
+{transform:"translate(0,0)",opacity:1},
+{transform:`translate(${x}px,${y}px)`,opacity:0}
+],{
+duration:1200,
+easing:"ease-out"
+});
+
+setTimeout(()=>particle.remove(),1200);
+
+}
+
 }
 
 function launchHeartFireworks(){
-    let count=0;
-    const interval=setInterval(()=>{
-        createHeartFirework();
-        count++;
-        if(count>12) clearInterval(interval);
-    },700);
+
+let count=0;
+
+const interval=setInterval(()=>{
+
+createHeartFirework();
+
+count++;
+
+if(count>12) clearInterval(interval);
+
+},700)
+
 }
+
 </script>
 
 </body>
