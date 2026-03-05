@@ -18,6 +18,23 @@ body{
     color:white;
 }
 
+/* ===== ICON RƠI ===== */
+.fallIcon{
+    position:fixed;
+    top:-40px;
+    font-size:22px;
+    animation:fall linear forwards;
+    pointer-events:none;
+    opacity:0.9;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
 /* ===== START SCREEN ===== */
 #startScreen{
     position:fixed;
@@ -141,9 +158,9 @@ const startScreen=document.getElementById("startScreen");
 const startBox=document.getElementById("startBox");
 const mainBox=document.getElementById("mainBox");
 
-/* ICON BAY SAU KHUNG */
-const icons=["✨","💞","💓","💗","💖","🎉","🎊","🌟","🌷","🌹","🌸","🌻"];
+const icons=["✨","💞","💓","💗","💖","🎉","🎊","🌟","🌷","🌹","🌸","🌻","🐱","🍁"];
 
+/* ICON BAY SAU KHUNG */
 setInterval(()=>{
     const el=document.createElement("div");
     el.classList.add("bgIcon");
@@ -154,9 +171,24 @@ setInterval(()=>{
     setTimeout(()=>el.remove(),8000);
 },500);
 
+/* ICON RƠI */
+function startFallingIcons(){
+    setInterval(()=>{
+        const el=document.createElement("div");
+        el.classList.add("fallIcon");
+        el.innerHTML=icons[Math.floor(Math.random()*icons.length)];
+        el.style.left=Math.random()*100+"vw";
+        el.style.animationDuration=(4+Math.random()*3)+"s";
+        document.body.appendChild(el);
+        setTimeout(()=>el.remove(),7000);
+    },300);
+}
+
 /* CLICK */
 startBox.onclick=()=>{
     startBox.classList.add("break");
+    startFallingIcons();
+
     setTimeout(()=>{
         startScreen.style.display="none";
         mainBox.style.display="block";
@@ -164,12 +196,32 @@ startBox.onclick=()=>{
     },600);
 };
 
-/* ===== TEXT TYPING ===== */
+/* ===== TEXT ===== */
 const lines=[
 "💖 Chúc các bạn nữ 9A10 một ngày 8/3 thật rực rỡ!",
-"🌷 Luôn xinh đẹp theo cách riêng của mình.",
-"📚 Học giỏi, tự tin và đạt được mọi mục tiêu.",
-"✨ Mỗi ngày đến lớp đều tràn ngập tiếng cười."
+"🌸 Luôn xinh đẹp và tỏa sáng theo cách riêng.",
+"🌷 Mỗi ngày đến lớp đều tràn ngập tiếng cười.",
+"✨ Chúc các bạn luôn vui vẻ và hạnh phúc.",
+"🌹 Học giỏi hơn mỗi ngày và đạt nhiều thành tích tốt.",
+"💞 Luôn tự tin với chính mình.",
+"🌸 Chúc các bạn luôn mạnh mẽ và bản lĩnh.",
+"🌷 Mong rằng mọi ước mơ đều sẽ thành hiện thực.",
+"✨ Cuộc sống luôn đầy màu sắc và niềm vui.",
+"🌻 Chúc các bạn luôn được yêu thương.",
+"💗 Luôn giữ nụ cười trên môi mỗi ngày.",
+"🌸 Học tập thật tốt và đạt điểm cao.",
+"🌹 Luôn gặp nhiều may mắn trong cuộc sống.",
+"🌷 Mỗi ngày đều là một ngày thật đẹp.",
+"✨ Chúc các bạn luôn tràn đầy năng lượng.",
+"💞 Luôn vui vẻ bên bạn bè và gia đình.",
+"🌸 Có thật nhiều kỷ niệm đẹp tuổi học trò.",
+"🌻 Luôn tự tin bước tới tương lai.",
+"🌷 Chúc mọi điều tốt đẹp sẽ đến với các bạn.",
+"💗 Mãi luôn xinh đẹp và đáng yêu.",
+"🌸 Hy vọng mỗi ngày đều là một ngày vui.",
+"✨ Chúc các bạn luôn đạt được điều mình mong muốn.",
+"🌹 Thanh xuân thật rực rỡ và đáng nhớ.",
+"💖 Happy Women's Day 8/3!"
 ];
 
 const container=document.getElementById("message");
@@ -182,7 +234,7 @@ function typeWriter(text,element,speed,callback){
             i++;
             setTimeout(typing,speed);
         }else if(callback){
-            setTimeout(callback,500);
+            setTimeout(callback,400);
         }
     }
     typing();
