@@ -28,7 +28,7 @@ background:linear-gradient(135deg,#ff4e80,#ff85a1);
 display:flex;
 justify-content:center;
 align-items:center;
-z-index:999;
+z-index:10;
 }
 
 .startBox{
@@ -40,6 +40,7 @@ backdrop-filter:blur(15px);
 box-shadow:0 0 40px rgba(255,255,255,0.6);
 cursor:pointer;
 transition:0.3s;
+z-index:20;
 }
 
 .startBox:hover{
@@ -62,7 +63,7 @@ animation:beat 1.2s infinite;
 50%{transform:scale(1.4);}
 }
 
-/* KHUNG CHÍNH */
+/* MAIN BOX */
 
 .box{
 background:rgba(255,255,255,0.18);
@@ -71,6 +72,7 @@ border-radius:25px;
 box-shadow:0 0 25px rgba(255,255,255,0.4);
 max-width:90%;
 display:none;
+z-index:20;
 }
 
 h1{
@@ -87,19 +89,24 @@ min-height:35px;
 /* ICON RƠI */
 
 .fallIcon{
-position:absolute;
+position:fixed;
 top:-50px;
 pointer-events:none;
 animation:fall linear forwards;
+z-index:1;
+will-change:transform;
 }
 
 @keyframes fall{
-to{
-transform:translateY(110vh) rotate(720deg);
+0%{
+transform:translateY(-50px) rotate(0deg);
+}
+100%{
+transform:translateY(110vh) rotate(360deg);
 }
 }
 
-/* PARTICLE PHÁO HOA */
+/* PARTICLE */
 
 .particle{
 position:absolute;
@@ -139,17 +146,13 @@ pointer-events:none;
 
 <script>
 
-/* ICON LIST */
+/* ICON */
 
 const icons=["💓","💞","💖","💗","🎉","💯","🎊","🌟","✨","🌷","🌹","🪷","🌸","🍁","🌻","🐱"];
-
-/* ICON RƠI 3 LAYER */
 
 function startFallingIcons(){
 
 setInterval(()=>{
-
-for(let i=0;i<2;i++){
 
 const el=document.createElement("div");
 
@@ -159,31 +162,28 @@ el.innerHTML=icons[Math.floor(Math.random()*icons.length)];
 
 el.style.left=Math.random()*100+"vw";
 
-/* layer xa */
-if(Math.random()<0.33){
+/* layer */
+
+const r=Math.random();
+
+if(r<0.33){
 el.style.fontSize="16px";
-el.style.animationDuration="7s";
+el.style.animationDuration="8s";
 }
-
-/* layer trung */
-else if(Math.random()<0.66){
+else if(r<0.66){
 el.style.fontSize="22px";
-el.style.animationDuration="5s";
+el.style.animationDuration="6s";
 }
-
-/* layer gần */
 else{
-el.style.fontSize="30px";
-el.style.animationDuration="4s";
+el.style.fontSize="28px";
+el.style.animationDuration="5s";
 }
 
 document.body.appendChild(el);
 
-setTimeout(()=>el.remove(),8000);
+setTimeout(()=>el.remove(),9000);
 
-}
-
-},260)
+},350)
 
 }
 
@@ -204,6 +204,7 @@ setTimeout(()=>{
 
 startScreen.style.display="none";
 mainBox.style.display="block";
+
 showLines(0);
 
 },600)
@@ -236,11 +237,11 @@ const lines=[
 "🌻 Chúc luôn hạnh phúc.",
 "💖 Happy Women's Day!"
 
-]
+];
 
 const container=document.getElementById("message");
 
-/* TYPE WRITER */
+/* TYPE */
 
 function typeWriter(text,element,speed,callback){
 
@@ -290,14 +291,13 @@ typeWriter(lines[index],p,25,()=>showLines(index+1));
 
 }
 
-/* PHÁO HOA TRÁI TIM */
+/* HEART FIREWORK */
 
 function createHeartFirework(){
 
 const colors=["#ff2e63","#ff4e80","#ff99cc","#ffffff"];
 
 const centerX=Math.random()*window.innerWidth;
-
 const centerY=Math.random()*(window.innerHeight/2);
 
 const scale=10;
@@ -305,7 +305,6 @@ const scale=10;
 for(let t=0;t<Math.PI*2;t+=0.25){
 
 const x=scale*16*Math.pow(Math.sin(t),3);
-
 const y=-scale*(13*Math.cos(t)
 -5*Math.cos(2*t)
 -2*Math.cos(3*t)
@@ -319,7 +318,6 @@ particle.style.background=
 colors[Math.floor(Math.random()*colors.length)];
 
 particle.style.left=centerX+"px";
-
 particle.style.top=centerY+"px";
 
 document.body.appendChild(particle);
