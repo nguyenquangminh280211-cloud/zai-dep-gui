@@ -66,24 +66,25 @@ animation:beat 1.2s infinite;
 50%{transform:scale(1.4);}
 }
 
-/* ICON RƠI */
+/* ICON RƠI THEO GIÓ */
 
 .fallIcon{
 position:fixed;
 top:-50px;
 pointer-events:none;
-animation:fall linear forwards;
+animation:fall linear forwards, wind 3s ease-in-out infinite;
 z-index:15;
-will-change:transform;
 }
 
 @keyframes fall{
-from{
-transform:translateY(-50px) rotate(0deg);
+from{transform:translateY(-50px);}
+to{transform:translateY(110vh);}
 }
-to{
-transform:translateY(110vh) rotate(360deg);
-}
+
+@keyframes wind{
+0%{margin-left:-10px;}
+50%{margin-left:10px;}
+100%{margin-left:-10px;}
 }
 
 /* HIỆU ỨNG VỠ */
@@ -125,6 +126,14 @@ position:absolute;
 width:6px;
 height:6px;
 border-radius:50%;
+pointer-events:none;
+}
+
+/* HEART BURST */
+
+.burstHeart{
+position:absolute;
+font-size:26px;
 pointer-events:none;
 }
 
@@ -176,7 +185,7 @@ el.style.left=Math.random()*100+"vw";
 
 el.style.fontSize=(18+Math.random()*14)+"px";
 
-el.style.animationDuration=(5+Math.random()*4)+"s";
+el.style.animationDuration=(6+Math.random()*3)+"s";
 
 document.body.appendChild(el);
 
@@ -186,31 +195,73 @@ setTimeout(()=>el.remove(),9000);
 
 setInterval(()=>{
 
-for(let i=0;i<2;i++){
-
 spawnIcon();
+
+},300);
+
+
+/* HEART BURST KHI CLICK */
+
+function heartBurst(x,y){
+
+const hearts=["💗","💖","💞","💓"];
+
+for(let i=0;i<25;i++){
+
+const heart=document.createElement("div");
+
+heart.classList.add("burstHeart");
+
+heart.innerHTML=hearts[Math.floor(Math.random()*hearts.length)];
+
+heart.style.left=x+"px";
+heart.style.top=y+"px";
+
+document.body.appendChild(heart);
+
+const angle=Math.random()*Math.PI*2;
+const distance=120+Math.random()*120;
+
+const dx=Math.cos(angle)*distance;
+const dy=Math.sin(angle)*distance;
+
+heart.animate([
+{transform:"translate(0,0)",opacity:1},
+{transform:`translate(${dx}px,${dy}px)`,opacity:0}
+],{
+duration:900,
+easing:"ease-out"
+});
+
+setTimeout(()=>heart.remove(),900);
 
 }
 
-},260);
+}
 
 /* CLICK */
 
-startBox.onclick=()=>{
+startBox.onclick=(e)=>{
+
+const rect=startBox.getBoundingClientRect();
+
+const x=rect.left+rect.width/2;
+const y=rect.top+rect.height/2;
+
+heartBurst(x,y);
 
 startBox.classList.add("break");
 
 setTimeout(()=>{
 
 startScreen.style.display="none";
-
 mainBox.style.display="block";
-
 showLines(0);
 
-},600);
+},900);
 
 };
+
 
 /* LỜI CHÚC */
 
@@ -290,6 +341,7 @@ typeWriter(lines[index],p,25,()=>showLines(index+1));
 
 }
 
+
 /* PHÁO HOA TIM */
 
 function createHeartFirework(){
@@ -319,27 +371,19 @@ const particle=document.createElement("div");
 particle.classList.add("particle");
 
 particle.style.background=
-
 colors[Math.floor(Math.random()*colors.length)];
 
 particle.style.left=centerX+"px";
-
 particle.style.top=centerY+"px";
 
 document.body.appendChild(particle);
 
 particle.animate([
-
 {transform:"translate(0,0)",opacity:1},
-
 {transform:`translate(${x}px,${y}px)`,opacity:0}
-
 ],{
-
 duration:1200,
-
 easing:"ease-out"
-
 });
 
 setTimeout(()=>particle.remove(),1200);
