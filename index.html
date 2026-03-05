@@ -28,8 +28,10 @@ background:linear-gradient(135deg,#ff4e80,#ff85a1);
 display:flex;
 justify-content:center;
 align-items:center;
-z-index:10;
+z-index:5;
 }
+
+/* KHUNG KÍNH */
 
 .startBox{
 position:relative;
@@ -40,7 +42,6 @@ backdrop-filter:blur(15px);
 box-shadow:0 0 40px rgba(255,255,255,0.6);
 cursor:pointer;
 transition:0.3s;
-z-index:20;
 }
 
 .startBox:hover{
@@ -53,6 +54,8 @@ animation:shake 0.3s infinite;
 75%{transform:translateX(-2px);}
 }
 
+/* TIM ĐẬP */
+
 .heartBeat{
 position:absolute;
 font-size:22px;
@@ -61,6 +64,36 @@ animation:beat 1.2s infinite;
 
 @keyframes beat{
 50%{transform:scale(1.4);}
+}
+
+/* ICON RƠI */
+
+.fallIcon{
+position:fixed;
+top:-50px;
+pointer-events:none;
+animation:fall linear forwards;
+z-index:15;
+will-change:transform;
+}
+
+@keyframes fall{
+from{
+transform:translateY(-50px) rotate(0deg);
+}
+to{
+transform:translateY(110vh) rotate(360deg);
+}
+}
+
+/* HIỆU ỨNG VỠ */
+
+.break{
+animation:explodeBox 0.6s forwards;
+}
+
+@keyframes explodeBox{
+100%{transform:scale(1.8) rotate(15deg);opacity:0;}
 }
 
 /* MAIN BOX */
@@ -72,7 +105,6 @@ border-radius:25px;
 box-shadow:0 0 25px rgba(255,255,255,0.4);
 max-width:90%;
 display:none;
-z-index:20;
 }
 
 h1{
@@ -86,27 +118,7 @@ margin:15px 0;
 min-height:35px;
 }
 
-/* ICON RƠI */
-
-.fallIcon{
-position:fixed;
-top:-50px;
-pointer-events:none;
-animation:fall linear forwards;
-z-index:1;
-will-change:transform;
-}
-
-@keyframes fall{
-0%{
-transform:translateY(-50px) rotate(0deg);
-}
-100%{
-transform:translateY(110vh) rotate(360deg);
-}
-}
-
-/* PARTICLE */
+/* PARTICLE PHÁO HOA */
 
 .particle{
 position:absolute;
@@ -122,7 +134,6 @@ pointer-events:none;
 <body>
 
 <div id="startScreen">
-
 <div class="startBox" id="startBox">
 
 <h2>💖 Bấm để mở điều đặc biệt 💖</h2>
@@ -133,7 +144,6 @@ pointer-events:none;
 <div class="heartBeat" style="bottom:-15px;right:-15px;">💗</div>
 
 </div>
-
 </div>
 
 <div class="box" id="mainBox">
@@ -146,13 +156,15 @@ pointer-events:none;
 
 <script>
 
-/* ICON */
+const startScreen=document.getElementById("startScreen");
+const startBox=document.getElementById("startBox");
+const mainBox=document.getElementById("mainBox");
+
+/* ICON RƠI */
 
 const icons=["💓","💞","💖","💗","🎉","💯","🎊","🌟","✨","🌷","🌹","🪷","🌸","🍁","🌻","🐱"];
 
-function startFallingIcons(){
-
-setInterval(()=>{
+function spawnIcon(){
 
 const el=document.createElement("div");
 
@@ -162,86 +174,73 @@ el.innerHTML=icons[Math.floor(Math.random()*icons.length)];
 
 el.style.left=Math.random()*100+"vw";
 
-/* layer */
+el.style.fontSize=(18+Math.random()*14)+"px";
 
-const r=Math.random();
-
-if(r<0.33){
-el.style.fontSize="16px";
-el.style.animationDuration="8s";
-}
-else if(r<0.66){
-el.style.fontSize="22px";
-el.style.animationDuration="6s";
-}
-else{
-el.style.fontSize="28px";
-el.style.animationDuration="5s";
-}
+el.style.animationDuration=(5+Math.random()*4)+"s";
 
 document.body.appendChild(el);
 
 setTimeout(()=>el.remove(),9000);
 
-},350)
+}
+
+setInterval(()=>{
+
+for(let i=0;i<2;i++){
+
+spawnIcon();
 
 }
 
-startFallingIcons();
+},260);
 
-/* START CLICK */
-
-const startBox=document.getElementById("startBox");
-const startScreen=document.getElementById("startScreen");
-const mainBox=document.getElementById("mainBox");
+/* CLICK */
 
 startBox.onclick=()=>{
 
-startBox.style.transform="scale(1.6) rotate(10deg)";
-startBox.style.opacity="0";
+startBox.classList.add("break");
 
 setTimeout(()=>{
 
 startScreen.style.display="none";
+
 mainBox.style.display="block";
 
 showLines(0);
 
-},600)
+},600);
 
-}
+};
 
 /* LỜI CHÚC */
 
 const lines=[
 
-"💖 Chúc các bạn nữ 9A10 một ngày 8/3 thật rực rỡ!",
-"🌸 Chúc các bạn luôn xinh đẹp theo cách riêng của mình.",
-"✨ Chúc mỗi ngày đến lớp đều tràn ngập tiếng cười.",
-"📚 Chúc các bạn học thật giỏi và đạt nhiều thành tích.",
-"🌷 Chúc luôn tự tin và tỏa sáng.",
-"💞 Chúc luôn gặp nhiều may mắn trong cuộc sống.",
-"🌻 Chúc mọi ước mơ đều trở thành sự thật.",
-"🌹 Chúc các bạn luôn được yêu thương.",
-"💓 Chúc tuổi trẻ thật rực rỡ.",
-"✨ Chúc luôn vui vẻ và hạnh phúc.",
-"🌸 Chúc mỗi ngày đều là một ngày đẹp trời.",
-"🌷 Chúc tình bạn lớp 9A10 mãi bền lâu.",
-"🌻 Chúc luôn mạnh mẽ và kiên cường.",
-"💖 Chúc các bạn luôn tỏa sáng theo cách riêng.",
-"🌹 Chúc cuộc sống luôn ngập tràn niềm vui.",
-"🌸 Chúc mọi điều tốt đẹp sẽ đến.",
-"✨ Chúc tương lai thật rực rỡ.",
-"🌷 Chúc thanh xuân thật đáng nhớ.",
-"💞 Chúc luôn giữ nụ cười trên môi.",
-"🌻 Chúc luôn hạnh phúc.",
-"💖 Happy Women's Day!"
+"💖 Chúc các bạn nữ 9A10 ngày 8/3 thật nhiều niềm vui!",
+"🌷 Luôn xinh đẹp theo cách riêng của mình.",
+"✨ Mỗi ngày đều rạng rỡ như ánh nắng.",
+"📚 Học tập thật tốt và đạt nhiều thành tích.",
+"💞 Luôn tự tin vào bản thân mình.",
+"🌸 Nụ cười luôn xuất hiện trên môi.",
+"🌻 Mang lại thật nhiều năng lượng tích cực.",
+"🎉 Có thật nhiều khoảnh khắc đáng nhớ.",
+"💓 Luôn được yêu thương và trân trọng.",
+"🌟 Tỏa sáng theo cách của riêng mình.",
+"🌹 Ngày càng xinh đẹp hơn.",
+"🍀 May mắn luôn ở bên.",
+"💫 Ước mơ nào cũng thành hiện thực.",
+"🌈 Cuộc sống luôn tràn đầy màu sắc.",
+"🎊 Luôn vui vẻ và hạnh phúc.",
+"✨ Luôn là bông hoa đẹp của lớp.",
+"🌸 Mang lại thật nhiều tiếng cười.",
+"💗 Luôn tỏa sáng như một vì sao.",
+"🎉 Có một tuổi học trò thật đẹp.",
+"🌷 Chúc mọi điều tốt đẹp nhất sẽ đến!",
+"💖 Happy Women's Day 8/3 💖"
 
 ];
 
 const container=document.getElementById("message");
-
-/* TYPE */
 
 function typeWriter(text,element,speed,callback){
 
@@ -291,13 +290,14 @@ typeWriter(lines[index],p,25,()=>showLines(index+1));
 
 }
 
-/* HEART FIREWORK */
+/* PHÁO HOA TIM */
 
 function createHeartFirework(){
 
 const colors=["#ff2e63","#ff4e80","#ff99cc","#ffffff"];
 
 const centerX=Math.random()*window.innerWidth;
+
 const centerY=Math.random()*(window.innerHeight/2);
 
 const scale=10;
@@ -305,9 +305,13 @@ const scale=10;
 for(let t=0;t<Math.PI*2;t+=0.25){
 
 const x=scale*16*Math.pow(Math.sin(t),3);
+
 const y=-scale*(13*Math.cos(t)
+
 -5*Math.cos(2*t)
+
 -2*Math.cos(3*t)
+
 -Math.cos(4*t));
 
 const particle=document.createElement("div");
@@ -315,19 +319,27 @@ const particle=document.createElement("div");
 particle.classList.add("particle");
 
 particle.style.background=
+
 colors[Math.floor(Math.random()*colors.length)];
 
 particle.style.left=centerX+"px";
+
 particle.style.top=centerY+"px";
 
 document.body.appendChild(particle);
 
 particle.animate([
+
 {transform:"translate(0,0)",opacity:1},
+
 {transform:`translate(${x}px,${y}px)`,opacity:0}
+
 ],{
+
 duration:1200,
+
 easing:"ease-out"
+
 });
 
 setTimeout(()=>particle.remove(),1200);
@@ -348,7 +360,7 @@ count++;
 
 if(count>12) clearInterval(interval);
 
-},700)
+},700);
 
 }
 
