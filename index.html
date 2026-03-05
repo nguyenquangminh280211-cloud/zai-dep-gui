@@ -31,7 +31,7 @@ align-items:center;
 z-index:5;
 }
 
-/* KHUNG KÍNH */
+/* KHUNG */
 
 .startBox{
 position:relative;
@@ -42,6 +42,7 @@ backdrop-filter:blur(15px);
 box-shadow:0 0 40px rgba(255,255,255,0.6);
 cursor:pointer;
 transition:0.3s;
+z-index:20;
 }
 
 .startBox:hover{
@@ -66,25 +67,31 @@ animation:beat 1.2s infinite;
 50%{transform:scale(1.4);}
 }
 
-/* ICON RƠI THEO GIÓ */
+/* ICON RƠI */
 
 .fallIcon{
 position:fixed;
-top:-50px;
+top:-40px;
 pointer-events:none;
-animation:fall linear forwards, wind 3s ease-in-out infinite;
-z-index:15;
+z-index:10;
+
+animation:fall linear forwards,
+wind 4s ease-in-out infinite;
 }
 
 @keyframes fall{
-from{transform:translateY(-50px);}
-to{transform:translateY(110vh);}
+0%{
+transform:translateY(-40px);
+}
+100%{
+transform:translateY(110vh);
+}
 }
 
 @keyframes wind{
-0%{margin-left:-10px;}
-50%{margin-left:10px;}
-100%{margin-left:-10px;}
+0%{margin-left:-15px;}
+50%{margin-left:15px;}
+100%{margin-left:-15px;}
 }
 
 /* HIỆU ỨNG VỠ */
@@ -94,10 +101,13 @@ animation:explodeBox 0.6s forwards;
 }
 
 @keyframes explodeBox{
-100%{transform:scale(1.8) rotate(15deg);opacity:0;}
+100%{
+transform:scale(1.8) rotate(15deg);
+opacity:0;
+}
 }
 
-/* MAIN BOX */
+/* MAIN */
 
 .box{
 background:rgba(255,255,255,0.18);
@@ -106,6 +116,7 @@ border-radius:25px;
 box-shadow:0 0 25px rgba(255,255,255,0.4);
 max-width:90%;
 display:none;
+z-index:20;
 }
 
 h1{
@@ -119,7 +130,7 @@ margin:15px 0;
 min-height:35px;
 }
 
-/* PARTICLE PHÁO HOA */
+/* PARTICLE */
 
 .particle{
 position:absolute;
@@ -135,6 +146,7 @@ pointer-events:none;
 position:absolute;
 font-size:26px;
 pointer-events:none;
+z-index:50;
 }
 
 </style>
@@ -171,46 +183,48 @@ const mainBox=document.getElementById("mainBox");
 
 /* ICON RƠI */
 
-const icons=["💓","💞","💖","💗","🎉","💯","🎊","🌟","✨","🌷","🌹","🪷","🌸","🍁","🌻","🐱"];
+const icons=[
+"💓","💞","💖","💗",
+"🎉","💯","🎊",
+"🌟","✨",
+"🌷","🌹","🪷","🌸","🍁","🌻",
+"🐱"
+];
 
 function spawnIcon(){
 
 const el=document.createElement("div");
 
-el.classList.add("fallIcon");
+el.className="fallIcon";
 
 el.innerHTML=icons[Math.floor(Math.random()*icons.length)];
 
 el.style.left=Math.random()*100+"vw";
 
-el.style.fontSize=(18+Math.random()*14)+"px";
+el.style.fontSize=(18+Math.random()*12)+"px";
 
-el.style.animationDuration=(6+Math.random()*3)+"s";
+el.style.animationDuration=(7+Math.random()*3)+"s";
 
 document.body.appendChild(el);
 
-setTimeout(()=>el.remove(),9000);
+setTimeout(()=>el.remove(),10000);
 
 }
 
-setInterval(()=>{
-
-spawnIcon();
-
-},300);
+setInterval(spawnIcon,450);
 
 
-/* HEART BURST KHI CLICK */
+/* HEART BURST */
 
 function heartBurst(x,y){
 
 const hearts=["💗","💖","💞","💓"];
 
-for(let i=0;i<25;i++){
+for(let i=0;i<28;i++){
 
 const heart=document.createElement("div");
 
-heart.classList.add("burstHeart");
+heart.className="burstHeart";
 
 heart.innerHTML=hearts[Math.floor(Math.random()*hearts.length)];
 
@@ -220,9 +234,11 @@ heart.style.top=y+"px";
 document.body.appendChild(heart);
 
 const angle=Math.random()*Math.PI*2;
-const distance=120+Math.random()*120;
+
+const distance=120+Math.random()*140;
 
 const dx=Math.cos(angle)*distance;
+
 const dy=Math.sin(angle)*distance;
 
 heart.animate([
@@ -239,13 +255,15 @@ setTimeout(()=>heart.remove(),900);
 
 }
 
+
 /* CLICK */
 
-startBox.onclick=(e)=>{
+startBox.onclick=()=>{
 
 const rect=startBox.getBoundingClientRect();
 
 const x=rect.left+rect.width/2;
+
 const y=rect.top+rect.height/2;
 
 heartBurst(x,y);
@@ -255,10 +273,12 @@ startBox.classList.add("break");
 setTimeout(()=>{
 
 startScreen.style.display="none";
+
 mainBox.style.display="block";
+
 showLines(0);
 
-},900);
+},800);
 
 };
 
@@ -311,7 +331,7 @@ setTimeout(typing,speed);
 
 else if(callback){
 
-setTimeout(callback,500);
+setTimeout(callback,400);
 
 }
 
@@ -333,7 +353,7 @@ return;
 
 const p=document.createElement("div");
 
-p.classList.add("line");
+p.className="line";
 
 container.appendChild(p);
 
@@ -359,16 +379,13 @@ for(let t=0;t<Math.PI*2;t+=0.25){
 const x=scale*16*Math.pow(Math.sin(t),3);
 
 const y=-scale*(13*Math.cos(t)
-
 -5*Math.cos(2*t)
-
 -2*Math.cos(3*t)
-
 -Math.cos(4*t));
 
 const particle=document.createElement("div");
 
-particle.classList.add("particle");
+particle.className="particle";
 
 particle.style.background=
 colors[Math.floor(Math.random()*colors.length)];
