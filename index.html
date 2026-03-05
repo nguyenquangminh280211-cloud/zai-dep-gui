@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>8/3 - 9A10</title>
+<title>Chúc mừng 8/3 - 9A10</title>
 
 <style>
 
@@ -11,102 +11,78 @@ margin:0;
 height:100vh;
 overflow:hidden;
 display:flex;
-justify-content:center;
 align-items:center;
+justify-content:center;
+background:linear-gradient(135deg,#ff3d7f,#ff7aa5);
 font-family:sans-serif;
-background:linear-gradient(135deg,#ff4d88,#ff7aa8);
+color:white;
 }
 
 /* ICON RƠI */
 
 .icon{
 position:fixed;
-top:-30px;
+top:-50px;
 font-size:20px;
-pointer-events:none;
 animation:fall linear forwards;
+pointer-events:none;
 }
 
 @keyframes fall{
-0%{transform:translateY(-50px) translateX(0);opacity:0;}
-10%{opacity:1;}
-100%{transform:translateY(110vh) translateX(60px);opacity:0;}
+to{
+transform:translateY(110vh) rotate(360deg);
+opacity:0.9;
+}
 }
 
-/* BOX */
+/* BOX ĐẦU */
 
 #startBox{
 position:relative;
-padding:35px 70px;
-background:rgba(255,255,255,0.35);
-backdrop-filter:blur(10px);
-border-radius:25px;
-color:white;
+padding:35px 55px;
 font-size:22px;
-text-align:center;
-box-shadow:0 0 30px rgba(255,255,255,0.5);
+background:rgba(255,255,255,0.25);
+backdrop-filter:blur(10px);
+border-radius:20px;
+box-shadow:0 0 40px rgba(255,255,255,0.6);
 cursor:pointer;
 transition:0.3s;
 }
 
 #startBox:hover{
-transform:scale(1.05);
+transform:scale(1.08);
 }
 
-/* TIM GÓC */
+/* TIM 4 GÓC */
 
 .cornerHeart{
 position:absolute;
-font-size:26px;
-animation:heartbeat 1.2s infinite;
+font-size:24px;
+animation:beat 1.2s infinite;
 }
 
-.topLeft{top:-15px;left:-15px;}
-.topRight{top:-15px;right:-15px;}
-.bottomLeft{bottom:-15px;left:-15px;}
-.bottomRight{bottom:-15px;right:-15px;}
+.topLeft{top:-12px;left:-12px;}
+.topRight{top:-12px;right:-12px;}
+.bottomLeft{bottom:-12px;left:-12px;}
+.bottomRight{bottom:-12px;right:-12px;}
 
-@keyframes heartbeat{
+@keyframes beat{
 0%{transform:scale(1);}
-25%{transform:scale(1.35);}
-40%{transform:scale(1);}
-60%{transform:scale(1.35);}
+30%{transform:scale(1.35);}
+60%{transform:scale(1);}
 100%{transform:scale(1);}
 }
 
-/* LỜI CHÚC */
+/* NỘI DUNG LỜI CHÚC */
 
-#wishBox{
-display:none;
-max-width:85%;
-padding:30px;
-background:rgba(255,255,255,0.35);
-backdrop-filter:blur(10px);
-border-radius:25px;
-color:white;
-font-size:22px;
+#content{
+position:absolute;
 text-align:center;
-box-shadow:0 0 30px rgba(255,255,255,0.5);
-}
-
-/* PHÁO HOA */
-
-.firework{
-position:fixed;
+width:90%;
+max-width:600px;
 font-size:26px;
-animation:boom 1s forwards;
-pointer-events:none;
-}
-
-@keyframes boom{
-0%{
-transform:scale(0);
-opacity:1;
-}
-100%{
-transform:scale(2.2);
-opacity:0;
-}
+display:none;
+line-height:1.5;
 }
 
 </style>
@@ -114,7 +90,10 @@ opacity:0;
 
 <body>
 
+<!-- BOX BẤM -->
+
 <div id="startBox" onclick="startEvent()">
+
 💖 Bấm để mở điều đặc biệt 💖
 
 <div class="cornerHeart topLeft">💗</div>
@@ -124,60 +103,70 @@ opacity:0;
 
 </div>
 
-<div id="wishBox">
-<span id="text"></span>
-</div>
+
+<!-- LỜI CHÚC -->
+
+<div id="content"></div>
+
 
 <script>
 
-/* ICON RƠI */
+/* ICON LIST */
 
-const icons=["💓","💞","💖","💗","🎉","🎊","🌟","✨","🌷","🌹","🪷","🌸","🍁","🌻","🐱"];
+const icons=[
+"💓","💞","💖","💗","🎉","🎊","🌟","✨","🌷","🌹","🪷","🌸","🍁","🌻","🐱"
+];
+
+/* ICON RƠI */
 
 function spawnIcon(){
 
-let icon=document.createElement("div");
+const icon=document.createElement("div");
+
 icon.className="icon";
-icon.innerHTML=icons[Math.floor(Math.random()*icons.length)];
+
+icon.innerText=icons[Math.floor(Math.random()*icons.length)];
 
 icon.style.left=Math.random()*100+"vw";
-icon.style.animationDuration=(6+Math.random()*3)+"s";
+
+icon.style.animationDuration=4+Math.random()*3+"s";
 
 document.body.appendChild(icon);
 
-setTimeout(()=>icon.remove(),9000);
+setTimeout(()=>icon.remove(),7000);
 
 }
 
-setInterval(spawnIcon,700);
+setInterval(spawnIcon,400);
 
 
-/* TIM BẮN RA KHI CLICK */
+/* TIM BẮN RA */
 
-function heartExplosion(){
+function heartBurst(){
 
-let centerX=window.innerWidth/2;
-let centerY=window.innerHeight/2;
+for(let i=0;i<12;i++){
 
-for(let i=0;i<25;i++){
+const heart=document.createElement("div");
 
-let heart=document.createElement("div");
-heart.className="firework";
+heart.innerText="💗";
 
-heart.innerHTML=["💗","💖","💞","💓"][Math.floor(Math.random()*4)];
-
-let angle=Math.random()*2*Math.PI;
-let distance=200+Math.random()*200;
-
-let x=centerX+Math.cos(angle)*distance;
-let y=centerY+Math.sin(angle)*distance;
-
-heart.style.left=x+"px";
-heart.style.top=y+"px";
+heart.style.position="fixed";
+heart.style.left="50%";
+heart.style.top="50%";
+heart.style.fontSize="24px";
+heart.style.pointerEvents="none";
 
 document.body.appendChild(heart);
 
-setTimeout(()=>heart.remove(),1000);
+const angle=Math.random()*360;
+const dist=150+Math.random()*100;
+
+heart.animate([
+{transform:"translate(-50%,-50%) scale(1)"},
+{transform:`translate(calc(-50% + ${Math.cos(angle)*dist}px),calc(-50% + ${Math.sin(angle)*dist}px)) scale(1.6)`,opacity:0}
+],{duration:900,easing:"ease-out"});
+
+setTimeout(()=>heart.remove(),900);
 
 }
 
@@ -188,96 +177,87 @@ setTimeout(()=>heart.remove(),1000);
 
 const wishes=[
 
-"Chúc các bạn nữ 9A10 luôn xinh đẹp và rạng rỡ 🌸",
-"Chúc các bạn nữ luôn vui vẻ và tràn đầy năng lượng 🌷",
-"Chúc các bạn nữ học giỏi và đạt nhiều thành tích 💯",
-"Chúc các bạn luôn cười thật nhiều mỗi ngày 😊",
-"Chúc các bạn luôn tự tin và tỏa sáng 🌟",
-"Chúc các bạn luôn gặp nhiều may mắn 🍀",
-"Chúc các bạn có thật nhiều niềm vui 🎉",
-"Chúc các bạn luôn hạnh phúc 💖",
-"Chúc các bạn luôn được yêu thương 💞",
-"Chúc các bạn luôn thành công trong học tập 📚",
-"Chúc các bạn có một ngày 8/3 thật đặc biệt 🌹",
-"Chúc các bạn luôn đáng yêu như bây giờ 🐱",
-"Chúc các bạn luôn mạnh mẽ và tự tin ✨",
-"Chúc các bạn luôn đạt được ước mơ của mình 🌈",
-"Chúc các bạn luôn vui vẻ bên bạn bè 🎊",
-"Chúc các bạn luôn tỏa sáng theo cách riêng 🌟",
-"Chúc các bạn luôn giữ nụ cười trên môi 😊",
-"Chúc các bạn luôn có những ngày thật đẹp 🌸",
-"Chúc các bạn luôn được yêu quý 💗",
-"Chúc các bạn luôn hạnh phúc và bình an 💞"
+"Chúc các bạn nữ 9A10 luôn xinh đẹp 🌸",
+"Luôn vui vẻ và tràn đầy năng lượng 🌷",
+"Ngày nào cũng cười thật nhiều 🌟",
+"Luôn học giỏi và đạt nhiều thành tích 🎓",
+"Luôn được mọi người yêu quý 💖",
+"Mỗi ngày đều thật rực rỡ ✨",
+"Luôn tự tin và tỏa sáng 🌟",
+"Chúc các bạn luôn may mắn 🍀",
+"Luôn đạt được ước mơ của mình 💫",
+"Thanh xuân thật đẹp và đáng nhớ 🌸",
+"Luôn vui vẻ bên bạn bè 🫶",
+"Ngày nào cũng hạnh phúc 🌷",
+"Luôn tràn đầy năng lượng tích cực ☀️",
+"Chúc 9A10 mãi đoàn kết 🎉",
+"Luôn xinh xắn và đáng yêu 💞",
+"Chúc mọi điều tốt đẹp đến với các bạn 💖",
+"Luôn thành công trong học tập 📚",
+"Luôn mạnh mẽ và tự tin 💫",
+"Chúc ngày 8/3 thật ý nghĩa 🌹",
+"9A10 mãi đỉnh 🔥"
 
 ];
 
+
+/* TYPEWRITER */
+
 let wishIndex=0;
-let charIndex=0;
 
-function typeWriter(){
+function showWish(){
 
-if(wishIndex>=wishes.length){
+const content=document.getElementById("content");
 
-fireworkShow();
-return;
+content.innerHTML="";
 
-}
+let text=wishes[wishIndex];
 
-let current=wishes[wishIndex];
+let i=0;
 
-if(charIndex<current.length){
+function type(){
 
-document.getElementById("text").innerHTML+=current.charAt(charIndex);
+if(i<text.length){
 
-charIndex++;
+content.innerHTML+=text.charAt(i);
 
-setTimeout(typeWriter,35);
+i++;
+
+setTimeout(type,50);
 
 }else{
 
 setTimeout(()=>{
-
-document.getElementById("text").innerHTML+="<br><br>";
-charIndex=0;
-wishIndex++;
-
-typeWriter();
-
-},1200);
+wishIndex=(wishIndex+1)%wishes.length;
+showWish();
+},2000);
 
 }
 
 }
 
-/* PHÁO HOA CUỐI */
-
-function fireworkShow(){
-
-setInterval(()=>{
-
-let fw=document.createElement("div");
-
-fw.className="firework";
-fw.innerHTML="💖";
-
-fw.style.left=Math.random()*100+"vw";
-fw.style.top=Math.random()*80+"vh";
-
-document.body.appendChild(fw);
-
-setTimeout(()=>fw.remove(),1000);
-
-},700);
+type();
 
 }
 
 
-/* START */
+/* START EVENT */
 
 function startEvent(){
 
-heartExplosion();
+heartBurst();
 
 document.getElementById("startBox").style.display="none";
 
-document.getElementById("wishBox").
+const content=document.getElementById("content");
+
+content.style.display="block";
+
+showWish();
+
+}
+
+</script>
+
+</body>
+</html>
