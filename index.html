@@ -2,84 +2,85 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Chúc mừng 8/3 - 9A10</title>
 
 <style>
+
 body{
 margin:0;
 height:100vh;
 overflow:hidden;
-font-family:Arial;
-background:linear-gradient(135deg,#ff2e7a,#ff6aa8);
+font-family:sans-serif;
 display:flex;
 justify-content:center;
 align-items:center;
-color:white;
+background:linear-gradient(135deg,#ff2e7a,#ff6aa6);
 }
 
-/* BOX MỞ */
-#startBox{
-position:absolute;
-padding:30px 50px;
-font-size:26px;
-background:rgba(255,255,255,0.2);
-border-radius:20px;
-backdrop-filter:blur(10px);
-cursor:pointer;
-text-align:center;
-box-shadow:0 0 25px rgba(255,255,255,0.6);
-transition:0.3s;
-z-index:10;
-}
+/* icon rơi */
 
-#startBox:hover{
-transform:scale(1.05);
-}
-
-/* BOX LỜI CHÚC */
-#wishBox{
-position:absolute;
-padding:30px 40px;
-max-width:80%;
-text-align:center;
-font-size:24px;
-background:rgba(255,255,255,0.15);
-border-radius:20px;
-backdrop-filter:blur(10px);
-box-shadow:0 0 20px rgba(255,255,255,0.4);
-display:none;
-z-index:5;
-}
-
-/* ICON RƠI */
-.icon{
+.fall{
 position:fixed;
-top:-30px;
-font-size:18px;
-animation:fall linear forwards;
+top:-20px;
+font-size:20px;
 pointer-events:none;
+animation:fall linear forwards;
 }
 
 @keyframes fall{
 to{
-transform:translateY(110vh) rotate(360deg);
-}
-}
-
-/* TIM BẮN */
-.heart{
-position:absolute;
-font-size:22px;
-animation:burst 1s forwards;
-}
-
-@keyframes burst{
-to{
-transform:translate(var(--x),var(--y));
+transform:translateY(110vh);
 opacity:0;
 }
+}
+
+/* box đầu */
+
+#box{
+position:relative;
+background:rgba(255,255,255,0.25);
+padding:35px 60px;
+border-radius:20px;
+backdrop-filter:blur(10px);
+color:white;
+font-size:18px;
+cursor:pointer;
+box-shadow:0 0 25px rgba(255,255,255,0.5);
+transition:0.3s;
+}
+
+#box:hover{
+transform:scale(1.05);
+}
+
+/* tim 4 góc */
+
+.corner{
+position:absolute;
+font-size:22px;
+animation:beat 1s infinite;
+}
+
+.c1{top:-12px;left:-12px;}
+.c2{top:-12px;right:-12px;}
+.c3{bottom:-12px;left:-12px;}
+.c4{bottom:-12px;right:-12px;}
+
+@keyframes beat{
+0%{transform:scale(1);}
+50%{transform:scale(1.3);}
+100%{transform:scale(1);}
+}
+
+/* lời chúc */
+
+#wish{
+position:absolute;
+color:white;
+font-size:22px;
+text-align:center;
+width:80%;
+display:none;
 }
 
 </style>
@@ -87,117 +88,134 @@ opacity:0;
 
 <body>
 
-<div id="startBox">💌 Bấm vào đây 💌</div>
+<div id="box" onclick="startWish()">
 
-<div id="wishBox">
-<span id="text"></span>
+<div class="corner c1">💗</div>
+<div class="corner c2">💗</div>
+<div class="corner c3">💗</div>
+<div class="corner c4">💗</div>
+
+💖 Bấm để mở điều đặc biệt 💖
+
 </div>
+
+<div id="wish"></div>
 
 <script>
 
-/* ICON LIST */
-const icons=["💓","💞","💖","💗","🎉","💯","🎊","🌟","✨","🌷","🌹","🪷","🌸","🍁","🌻","🐱"];
+/* icon rơi */
 
-/* ICON RƠI */
-function createIcon(){
-const icon=document.createElement("div");
-icon.className="icon";
-icon.innerText=icons[Math.floor(Math.random()*icons.length)];
+const icons=["💓","💞","💖","💗","🎉","🌸","🌷","✨","🐱"]
 
-icon.style.left=Math.random()*100+"vw";
-icon.style.animationDuration=(4+Math.random()*3)+"s";
+function createFall(){
 
-document.body.appendChild(icon);
+const icon=document.createElement("div")
+icon.className="fall"
+icon.innerText=icons[Math.floor(Math.random()*icons.length)]
 
-setTimeout(()=>icon.remove(),7000);
+icon.style.left=Math.random()*100+"vw"
+icon.style.animationDuration=(4+Math.random()*3)+"s"
+
+document.body.appendChild(icon)
+
+setTimeout(()=>icon.remove(),7000)
+
 }
 
-setInterval(createIcon,250);
+setInterval(createFall,400)
 
-/* TIM BẮN */
-function heartBurst(){
-for(let i=0;i<12;i++){
-const h=document.createElement("div");
-h.className="heart";
-h.innerText="💖";
+/* lời chúc */
 
-h.style.left="50%";
-h.style.top="50%";
-
-let x=(Math.random()-0.5)*300+"px";
-let y=(Math.random()-0.5)*300+"px";
-
-h.style.setProperty("--x",x);
-h.style.setProperty("--y",y);
-
-document.body.appendChild(h);
-
-setTimeout(()=>h.remove(),1000);
-}
-}
-
-/* LỜI CHÚC */
 const wishes=[
 
-"Chúc các bạn nữ 9A10 luôn xinh đẹp và rạng rỡ 🌸",
-"Chúc mọi người luôn vui vẻ mỗi ngày 🌷",
-"Luôn tràn đầy năng lượng tích cực ✨",
-"Ngày càng học giỏi hơn 💯",
-"Luôn tỏa sáng theo cách riêng của mình 🌟",
-"Luôn gặp nhiều may mắn 🍀",
-"Luôn được yêu thương và trân trọng 💞",
-"Chúc mọi điều tốt đẹp nhất 🌹",
-"Luôn cười thật nhiều 😄",
-"Luôn đạt được mục tiêu của mình 🎯",
-"Chúc 8/3 thật ý nghĩa 💐",
-"Luôn mạnh mẽ và tự tin 🌻",
-"Luôn xinh đẹp theo cách của riêng bạn 💖",
-"Luôn vui vẻ bên bạn bè 🐱",
-"Chúc những điều tuyệt vời nhất sẽ đến 🎊",
-"Luôn gặp những điều tích cực 🌸",
-"Luôn tràn đầy động lực học tập 📚",
-"Chúc các bạn luôn hạnh phúc 💗",
-"Luôn có thật nhiều tiếng cười 🎉",
-"Chúc một ngày 8/3 thật đáng nhớ 🌷"
+"Chúc bạn luôn vui vẻ và tràn đầy năng lượng 🌷",
+"Chúc bạn luôn xinh đẹp theo cách riêng của mình 💖",
+"Chúc bạn học giỏi và đạt được mọi mục tiêu 🌟",
+"Chúc bạn mỗi ngày đều có thật nhiều niềm vui 🌸",
+"Chúc bạn luôn được yêu thương và quan tâm 💞",
+"Chúc bạn có thật nhiều kỷ niệm đẹp tuổi học trò 🎉",
+"Chúc bạn luôn tự tin và mạnh mẽ 💗",
+"Chúc bạn luôn gặp nhiều may mắn 🍀",
+"Chúc bạn có thật nhiều tiếng cười mỗi ngày 😄",
+"Chúc bạn luôn rạng rỡ như ánh mặt trời ☀️",
+"Chúc bạn luôn giữ được nụ cười xinh 🌷",
+"Chúc bạn luôn đạt kết quả tốt trong học tập 📚",
+"Chúc bạn có thật nhiều điều bất ngờ dễ thương 💖",
+"Chúc bạn luôn được mọi người yêu quý 💞",
+"Chúc bạn có thật nhiều năng lượng tích cực ✨",
+"Chúc bạn luôn thành công trong tương lai 🌟",
+"Chúc bạn có một ngày 8/3 thật tuyệt vời 🌸",
+"Chúc bạn luôn hạnh phúc 💗",
+"Chúc bạn luôn tỏa sáng theo cách của mình 💫",
+"Chúc bạn luôn là chính mình và thật tuyệt vời 🌷"
 
-];
+]
 
-let index=0;
+let index=0
 
 function showWish(){
 
-const text=document.getElementById("text");
+document.getElementById("box").style.display="none"
 
-let str=wishes[index];
-let i=0;
-text.innerHTML="";
+const w=document.getElementById("wish")
+w.style.display="block"
 
-function type(){
-if(i<str.length){
-text.innerHTML+=str.charAt(i);
-i++;
-setTimeout(type,40);
-}
-}
+setInterval(()=>{
 
-type();
+w.innerText=wishes[index]
 
-index=(index+1)%wishes.length;
+index++
+if(index>=wishes.length) index=0
+
+},2500)
+
 }
 
-setInterval(showWish,4000);
+/* tim nổ */
 
-/* CLICK */
-document.getElementById("startBox").onclick=()=>{
+function explodeHearts(){
 
-heartBurst();
+const hearts=["💓","💞","💖","💗"]
 
-document.getElementById("startBox").style.display="none";
-document.getElementById("wishBox").style.display="block";
+for(let i=0;i<25;i++){
 
-showWish();
+const h=document.createElement("div")
+h.innerText=hearts[Math.floor(Math.random()*hearts.length)]
+h.style.position="fixed"
+h.style.left="50%"
+h.style.top="50%"
+h.style.fontSize="22px"
 
-};
+const x=(Math.random()-0.5)*600
+const y=(Math.random()-0.5)*600
+
+h.animate([
+{transform:"translate(0,0)",opacity:1},
+{transform:`translate(${x}px,${y}px)`,opacity:0}
+],{
+duration:1000,
+easing:"ease-out"
+})
+
+document.body.appendChild(h)
+
+setTimeout(()=>h.remove(),1000)
+
+}
+
+}
+
+/* bấm box */
+
+function startWish(){
+
+explodeHearts()
+
+setTimeout(()=>{
+showWish()
+},1000)
+
+}
 
 </script>
 
