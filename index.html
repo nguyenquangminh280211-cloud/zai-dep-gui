@@ -3,19 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Món Quà 8/3 - Thiệp Mở & Mưa Sao Băng</title>
+    <title>Món Quà 8/3 - Thiệp Mở & Sao Băng</title>
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css-all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             min-height: 100vh;
             background: linear-gradient(145deg, #fee0e8, #ffd9e6, #ffe4f0, #ffecf5);
@@ -26,618 +21,242 @@
             position: relative;
             overflow: hidden;
         }
-
-        /* ===== HIỆU ỨNG SAO BĂNG ===== */
         .shooting-star {
             position: absolute;
-            width: 4px;
-            height: 4px;
-            background: linear-gradient(45deg, #ffd700, #ffb6c1, #ffffff);
+            width: 4px; height: 4px;
+            background: linear-gradient(45deg, #ffd700, #ffb6c1, #fff);
             border-radius: 50%;
-            filter: drop-shadow(0 0 10px #ffd700);
+            filter: drop-shadow(0 0 10px gold);
             animation: shoot 1.5s ease-out forwards;
             z-index: 1001;
             pointer-events: none;
         }
-
         @keyframes shoot {
-            0% {
-                transform: translate(0, 0) scale(1);
-                opacity: 1;
-                width: 4px;
-                height: 4px;
-            }
-            20% {
-                width: 100px;
-                height: 2px;
-                opacity: 0.9;
-            }
-            50% {
-                width: 200px;
-                height: 1px;
-                opacity: 0.7;
-            }
-            100% {
-                transform: translate(var(--tx), var(--ty)) scale(0.1);
-                opacity: 0;
-                width: 300px;
-                height: 0.5px;
-            }
+            0% { transform: translate(0,0) scale(1); opacity: 1; width: 4px; height: 4px; }
+            20% { width: 100px; height: 2px; opacity: 0.9; }
+            50% { width: 200px; height: 1px; opacity: 0.7; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0.1); opacity: 0; width: 300px; height: 0.5px; }
         }
-
-        /* Nút điều khiển nhạc */
         .music-control {
-            position: fixed;
-            bottom: 15px;
-            right: 15px;
-            z-index: 10000;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(5px);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: #ff4d6d;
-            cursor: pointer;
-            box-shadow: 0 2px 8px rgba(255, 77, 109, 0.3);
-            border: 1.5px solid white;
+            position: fixed; bottom: 15px; right: 15px; z-index: 10000;
+            background: rgba(255,255,255,0.8); backdrop-filter: blur(5px);
+            width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; color: #ff4d6d; cursor: pointer;
+            box-shadow: 0 2px 8px rgba(255,77,109,0.3); border: 1.5px solid white;
             transition: all 0.2s ease;
         }
-
-        .music-control:hover {
-            transform: scale(1.1);
-            background: #ff4d6d;
-            color: white;
-        }
-
-        /* Lớp phủ nền nhẹ - HỒNG NHẸ */
+        .music-control:hover { transform: scale(1.1); background: #ff4d6d; color: white; }
         .overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 240, 245, 0.2);
-            backdrop-filter: blur(4px);
-            z-index: 1;
+            position: fixed; top:0; left:0; width:100%; height:100%;
+            background: rgba(255,240,245,0.2); backdrop-filter: blur(4px); z-index:1;
         }
-
-        /* Container chính */
         .gift-container {
-            position: relative;
-            z-index: 100;
-            width: 100%;
-            max-width: 600px;
-            padding: 1rem;
+            position: relative; z-index: 100; width:100%; max-width:600px; padding:1rem;
         }
-
-        /* ===== THIỆP 3D ===== */
         .card-3d {
-            position: relative;
-            width: 100%;
-            background: transparent;
-            perspective: 2000px;
-            cursor: pointer;
+            position: relative; width:100%; background: transparent;
+            perspective: 2000px; cursor: pointer;
         }
-
         .card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 1s;
-            transform-style: preserve-3d;
+            position: relative; width:100%; height:100%;
+            transition: transform 1s; transform-style: preserve-3d;
         }
-
-        .card-3d.opened .card-inner {
-            transform: rotateY(180deg);
-        }
-
+        .card-3d.opened .card-inner { transform: rotateY(180deg); }
         .card-front, .card-back {
-            position: relative;
-            width: 100%;
-            backface-visibility: hidden;
-            border-radius: 60px;
-            padding: 2.5rem 1.8rem;
+            position: relative; width:100%; backface-visibility: hidden;
+            border-radius: 60px; padding: 2.5rem 1.8rem;
             box-shadow: 0 25px 50px #ff99b0, 0 0 0 3px white inset, 0 0 0 6px #ffb8c9 inset;
             text-align: center;
         }
-
         .card-front {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px);
-            border: 2px solid #ff9eb5;
-            transform: rotateY(0deg);
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(15px);
+            border: 2px solid #ff9eb5; transform: rotateY(0deg);
         }
-
         .card-back {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px);
-            border: 2px solid #ff9eb5;
-            transform: rotateY(180deg);
-            position: absolute;
-            top: 0;
-            left: 0;
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(15px);
+            border: 2px solid #ff9eb5; transform: rotateY(180deg);
+            position: absolute; top:0; left:0;
         }
-
-        /* Mặt trước thiệp */
         .heart-cover {
-            font-size: 5rem;
-            color: #ff5777;
-            filter: drop-shadow(0 10px 8px #ffa5b9);
-            margin-bottom: 1rem;
+            font-size: 5rem; color: #ff5777;
+            filter: drop-shadow(0 10px 8px #ffa5b9); margin-bottom:1rem;
             animation: heartbeat 1.5s ease-in-out infinite;
         }
-
         .cover-title {
-            font-size: 2.5rem;
-            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem; font-family: 'Dancing Script', cursive;
             background: linear-gradient(145deg, #d14763, #ec6a7f);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            -webkit-background-clip: text; background-clip: text; color: transparent;
             margin-bottom: 1rem;
         }
-
         .cover-text {
-            font-size: 1.2rem;
-            color: #9e3d54;
-            background: rgba(255, 215, 255, 0.2);
-            padding: 1rem;
-            border-radius: 30px;
-            border: 1px dashed #ff7b9c;
-            line-height: 1.8;
+            font-size: 1.2rem; color: #9e3d54;
+            background: rgba(255,215,255,0.2); padding:1rem; border-radius:30px;
+            border: 1px dashed #ff7b9c; line-height:1.8;
         }
-
         .open-hint {
-            position: absolute;
-            bottom: 20px;
-            right: 30px;
-            font-size: 1rem;
-            color: #ff5777;
-            animation: bounce 1s infinite;
+            position: absolute; bottom:20px; right:30px;
+            font-size:1rem; color:#ff5777; animation: bounce 1s infinite;
         }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(10px); }
-        }
-
-        /* Mặt sau thiệp - HỘP QUÀ */
+        @keyframes bounce { 0%,100%{transform:translateX(0)} 50%{transform:translateX(10px)} }
         .gift-box {
             position: relative;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(15px);
-            border-radius: 60px;
-            padding: 2.5rem 1.8rem;
+            background: rgba(255,255,255,0.9); backdrop-filter: blur(15px);
+            border-radius: 60px; padding: 2.5rem 1.8rem;
             box-shadow: 0 25px 50px #ff99b0, 0 0 0 3px white inset, 0 0 0 6px #ffb8c9 inset;
-            text-align: center;
-            border: 2px solid #ff9eb5;
-            cursor: pointer;
+            text-align: center; border: 2px solid #ff9eb5; cursor: pointer;
             animation: glow 2.5s infinite alternate;
         }
-
-        /* Icon tim đập 4 góc */
-        .gift-box .corner-heart,
-        .message-box .corner-heart {
-            position: absolute;
-            font-size: 2.2rem;
-            z-index: 101;
+        .gift-box .corner-heart, .message-box .corner-heart {
+            position: absolute; font-size: 2.2rem; z-index: 101;
             animation: heartbeat 1.2s ease-in-out infinite;
-            filter: drop-shadow(0 0 15px #ff4d6d);
-            pointer-events: none;
-            font-weight: bold;
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8);
+            filter: drop-shadow(0 0 15px #ff4d6d); pointer-events: none;
+            font-weight: bold; -webkit-text-stroke: 1px rgba(255,255,255,0.8);
         }
-
         @keyframes heartbeat {
-            0% { transform: scale(1); }
-            25% { transform: scale(1.25); }
-            35% { transform: scale(1.1); }
-            45% { transform: scale(1.3); }
-            55% { transform: scale(1); }
-            100% { transform: scale(1); }
+            0%{transform:scale(1)} 25%{transform:scale(1.25)} 35%{transform:scale(1.1)}
+            45%{transform:scale(1.3)} 55%{transform:scale(1)} 100%{transform:scale(1)}
         }
-
-        .gift-box .corner-1,
-        .message-box .corner-1 { 
-            top: -5px; 
-            left: -5px; 
-            color: #ff1744; 
-            animation-delay: 0s;
-        }
-        .gift-box .corner-2,
-        .message-box .corner-2 { 
-            top: -5px; 
-            right: -5px; 
-            color: #ff4081; 
-            animation-delay: 0.3s;
-        }
-        .gift-box .corner-3,
-        .message-box .corner-3 { 
-            bottom: -5px; 
-            left: -5px; 
-            color: #f50057; 
-            animation-delay: 0.6s;
-        }
-        .gift-box .corner-4,
-        .message-box .corner-4 { 
-            bottom: -5px; 
-            right: -5px; 
-            color: #ff5e7d; 
-            animation-delay: 0.9s;
-        }
-
-        @keyframes glow {
-            from { box-shadow: 0 20px 40px #ff8aa8, 0 0 0 3px white inset, 0 0 0 6px #ffb8c9 inset; }
-            to { box-shadow: 0 30px 60px #ff6b8b, 0 0 0 3px #fff0f5 inset, 0 0 0 8px #ffa2b9 inset; }
-        }
-
+        .gift-box .corner-1, .message-box .corner-1 { top:-5px; left:-5px; color:#ff1744; animation-delay:0s; }
+        .gift-box .corner-2, .message-box .corner-2 { top:-5px; right:-5px; color:#ff4081; animation-delay:0.3s; }
+        .gift-box .corner-3, .message-box .corner-3 { bottom:-5px; left:-5px; color:#f50057; animation-delay:0.6s; }
+        .gift-box .corner-4, .message-box .corner-4 { bottom:-5px; right:-5px; color:#ff5e7d; animation-delay:0.9s; }
         .gift-icon {
-            font-size: 5rem;
-            color: #ff5777;
-            filter: drop-shadow(0 10px 8px #ffa5b9);
-            margin-bottom: 0.8rem;
-            animation: wobble 3s infinite;
+            font-size:5rem; color:#ff5777; filter:drop-shadow(0 10px 8px #ffa5b9);
+            margin-bottom:0.8rem; animation:wobble 3s infinite;
         }
-
-        @keyframes wobble {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(8deg); }
-            75% { transform: rotate(-8deg); }
-        }
-
+        @keyframes wobble { 0%,100%{transform:rotate(0deg)} 25%{transform:rotate(8deg)} 75%{transform:rotate(-8deg)} }
         .gift-box h2 {
-            font-size: 2.4rem;
-            font-family: 'Dancing Script', cursive;
-            background: linear-gradient(145deg, #d14763, #ec6a7f, #ff8aa8);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 1.2rem;
-            line-height: 1.3;
-            word-break: break-word;
+            font-size:2.4rem; font-family:'Dancing Script', cursive;
+            background:linear-gradient(145deg,#d14763,#ec6a7f,#ff8aa8);
+            -webkit-background-clip:text; background-clip:text; color:transparent;
+            margin-bottom:1.2rem; line-height:1.3; word-break:break-word;
         }
-
         .hint-text {
-            font-size: 1.5rem;
-            background: rgba(255, 255, 255, 0.7);
-            padding: 0.8rem 1.5rem;
-            border-radius: 50px;
-            display: inline-block;
-            border: 2px dashed #ff7b9c;
-            color: #9e3d54;
-            font-weight: 600;
-            backdrop-filter: blur(4px);
-            line-height: 1.4;
+            font-size:1.5rem; background:rgba(255,255,255,0.7); padding:0.8rem 1.5rem;
+            border-radius:50px; display:inline-block; border:2px dashed #ff7b9c;
+            color:#9e3d54; font-weight:600; backdrop-filter:blur(4px); line-height:1.4;
         }
-
-        /* HỘP LỜI CHÚC - NỀN HỒNG NHƯ CŨ */
         .message-box {
             position: relative;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(15px);
-            border-radius: 50px;
-            padding: 1.5rem 1.5rem;
+            background: rgba(255,255,255,0.9); backdrop-filter: blur(15px);
+            border-radius: 50px; padding: 1.5rem 1.5rem;
             box-shadow: 0 25px 50px #ff9eb5, 0 0 0 3px white inset;
-            border: 2px solid #ff8aa8;
-            display: none;
-            animation: messagePop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-            text-align: center;
+            border: 2px solid #ff8aa8; display: none;
+            animation: messagePop 0.6s cubic-bezier(0.34,1.56,0.64,1); text-align: center;
         }
-
-        @keyframes messagePop {
-            0% { opacity: 0; transform: scale(0.2) rotate(-10deg); }
-            100% { opacity: 1; transform: scale(1) rotate(0); }
-        }
-
+        @keyframes messagePop { 0%{opacity:0; transform:scale(0.2) rotate(-10deg)} 100%{opacity:1; transform:scale(1) rotate(0)} }
         .message-header {
-            font-size: 2.5rem;
-            font-family: 'Dancing Script', cursive;
-            background: linear-gradient(145deg, #db4d6a, #b33f58);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 5px;
+            font-size:2.5rem; font-family:'Dancing Script', cursive;
+            background:linear-gradient(145deg,#db4d6a,#b33f58);
+            -webkit-background-clip:text; background-clip:text; color:transparent;
+            margin-bottom:1rem; display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:5px;
         }
-
-        .small-text {
-            font-size: 0.7rem;
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 300;
-            color: #ff8aa8;
-            opacity: 0.6;
-            margin-left: 2px;
-            transform: translateY(2px);
-        }
-
+        .small-text { font-size:0.7rem; font-family:'Quicksand',sans-serif; font-weight:300; color:#ff8aa8; opacity:0.6; margin-left:2px; transform:translateY(2px); }
         .typing-area {
-            background: #fff0f5;
-            border-radius: 40px;
-            padding: 1.5rem 1.2rem;
-            margin: 1rem 0;
-            border-left: 8px solid #ff7b9c;
-            border-right: 8px solid #ff7b9c;
-            min-height: 160px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background:#fff0f5; border-radius:40px; padding:1.5rem 1.2rem; margin:1rem 0;
+            border-left:8px solid #ff7b9c; border-right:8px solid #ff7b9c; min-height:160px;
+            display:flex; align-items:center; justify-content:center;
         }
-
         .typing-line {
-            font-size: 1.3rem;
-            font-weight: 500;
-            color: #722b3c;
-            line-height: 1.6;
-            border-right: 3px solid #ff4365;
-            padding-right: 6px;
-            animation: blink 0.8s step-end infinite;
-            text-align: center;
-            white-space: pre-wrap;
-            word-break: break-word;
+            font-size:1.3rem; font-weight:500; color:#722b3c; line-height:1.6;
+            border-right:3px solid #ff4365; padding-right:6px;
+            animation:blink 0.8s step-end infinite; text-align:center; white-space:pre-wrap; word-break:break-word;
         }
-
-        @keyframes blink {
-            0%, 100% { border-color: #ff4365; }
-            50% { border-color: transparent; }
-        }
-
-        .nav-controls {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 20px 0 15px;
-            flex-wrap: wrap;
-        }
-
+        @keyframes blink { 0%,100%{border-color:#ff4365} 50%{border-color:transparent} }
+        .nav-controls { display:flex; justify-content:center; gap:15px; margin:20px 0 15px; flex-wrap:wrap; }
         .nav-btn {
-            background: #ffccd4;
-            border: none;
-            padding: 0.6rem 1.5rem;
-            border-radius: 40px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #752838;
-            box-shadow: 0 4px 0 #b3586b, 0 8px 15px #ff99aa;
-            cursor: pointer;
-            transition: 0.1s;
-            border: 2px solid white;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            background:#ffccd4; border:none; padding:0.6rem 1.5rem; border-radius:40px;
+            font-size:1.1rem; font-weight:600; color:#752838;
+            box-shadow:0 4px 0 #b3586b, 0 8px 15px #ff99aa; cursor:pointer;
+            transition:0.1s; border:2px solid white; display:flex; align-items:center; gap:8px;
         }
-
-        .nav-btn:active {
-            transform: translateY(4px);
-            box-shadow: 0 2px 0 #b3586b, 0 5px 10px #ff99aa;
-        }
-
-        .nav-btn:disabled {
-            opacity: 0.4;
-            transform: translateY(0);
-            box-shadow: 0 4px 0 #928282;
-            pointer-events: none;
-        }
-
-        .counter {
-            font-size: 1.2rem;
-            background: #ffd9e2;
-            padding: 0.4rem 1.5rem;
-            border-radius: 40px;
-            display: inline-block;
-            color: #a33f55;
-            font-weight: 600;
-        }
-
-        /* Lớp chứa icon rơi */
-        #rain-container {
-            position: fixed;
-            top: -10%;
-            left: 0;
-            width: 100%;
-            height: 110%;
-            pointer-events: none;
-            z-index: 5;
-            overflow: hidden;
-        }
-
+        .nav-btn:active { transform:translateY(4px); box-shadow:0 2px 0 #b3586b, 0 5px 10px #ff99aa; }
+        .nav-btn:disabled { opacity:0.4; transform:translateY(0); box-shadow:0 4px 0 #928282; pointer-events:none; }
+        .counter { font-size:1.2rem; background:#ffd9e2; padding:0.4rem 1.5rem; border-radius:40px; display:inline-block; color:#a33f55; font-weight:600; }
+        #rain-container { position:fixed; top:-10%; left:0; width:100%; height:110%; pointer-events:none; z-index:5; overflow:hidden; }
         .rain-icon {
-            position: absolute;
-            font-size: 1.2rem;
-            user-select: none;
-            animation: rain linear infinite;
-            color: #ff6b8b;
-            text-shadow: 0 3px 8px rgba(255, 100, 130, 0.4);
-            opacity: 0.8;
-            will-change: transform;
+            position:absolute; font-size:1.2rem; user-select:none; animation:rain linear infinite;
+            color:#ff6b8b; text-shadow:0 3px 8px rgba(255,100,130,0.4); opacity:0.8; will-change:transform;
         }
-
         @keyframes rain {
-            0% {
-                transform: translateY(-10vh) rotate(0deg);
-                opacity: 0.9;
-            }
-            100% {
-                transform: translateY(110vh) rotate(360deg);
-                opacity: 0.1;
-            }
+            0%{transform:translateY(-10vh) rotate(0deg); opacity:0.9}
+            100%{transform:translateY(110vh) rotate(360deg); opacity:0.1}
         }
-
-        /* Lớp chứa icon nổ */
-        #explosion-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1000;
-        }
-
+        #explosion-container { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1000; }
         .explosion-particle {
-            position: absolute;
-            font-size: 1.8rem;
-            user-select: none;
-            animation: explode 1.2s ease-out forwards;
-            text-shadow: 0 0 10px currentColor;
-            will-change: transform, opacity;
-            z-index: 1000;
+            position:absolute; font-size:1.8rem; user-select:none; animation:explode 1.2s ease-out forwards;
+            text-shadow:0 0 10px currentColor; will-change:transform,opacity; z-index:1000;
         }
-
         @keyframes explode {
-            0% {
-                opacity: 1;
-                transform: translate(0, 0) scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(var(--tx), var(--ty)) scale(0.3);
-            }
+            0%{opacity:1; transform:translate(0,0) scale(1)}
+            100%{opacity:0; transform:translate(var(--tx), var(--ty)) scale(0.3)}
         }
-
-        /* Lớp chứa pháo hoa trái tim */
-        #fireworks-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 200;
-        }
-
+        #fireworks-container { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:200; }
         .firework-particle {
-            position: absolute;
-            font-size: 0.9rem;
-            user-select: none;
-            animation: firework 1.5s ease-out forwards;
-            text-shadow: 0 0 5px currentColor;
-            will-change: transform, opacity;
+            position:absolute; font-size:0.9rem; user-select:none; animation:firework 1.5s ease-out forwards;
+            text-shadow:0 0 5px currentColor; will-change:transform,opacity;
         }
-
         @keyframes firework {
-            0% {
-                opacity: 1;
-                transform: translate(0, 0) scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(var(--tx), var(--ty)) scale(0.2);
-            }
+            0%{opacity:1; transform:translate(0,0) scale(1)}
+            100%{opacity:0; transform:translate(var(--tx), var(--ty)) scale(0.2)}
         }
+        #shooting-stars-container { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1001; }
     </style>
 </head>
 <body>
-    <!-- Nút điều khiển nhạc -->
-    <div class="music-control" id="musicBtn" onclick="toggleMusic()">
-        <i class="fas fa-play" id="musicIcon"></i>
-    </div>
-
-    <!-- Audio player -->
-    <audio id="bgMusic" loop>
-        <source src="https://www.myinstants.com/media/sounds/in-love-low-g.mp3" type="audio/mpeg">
-    </audio>
-
+    <div class="music-control" id="musicBtn" onclick="toggleMusic()"><i class="fas fa-play" id="musicIcon"></i></div>
+    <audio id="bgMusic" loop><source src="https://www.myinstants.com/media/sounds/in-love-low-g.mp3" type="audio/mpeg"></audio>
     <div class="overlay"></div>
-
-    <!-- Container cho hiệu ứng icon rơi -->
     <div id="rain-container"></div>
-    
-    <!-- Container cho hiệu ứng nổ -->
     <div id="explosion-container"></div>
-    
-    <!-- Container cho hiệu ứng pháo hoa trái tim -->
     <div id="fireworks-container"></div>
-    
-    <!-- Container cho hiệu ứng sao băng -->
     <div id="shooting-stars-container"></div>
 
     <div class="gift-container">
-        <!-- THIỆP 3D -->
         <div id="card3d" class="card-3d" onclick="openCard(event)">
             <div class="card-inner">
-                <!-- Mặt trước thiệp -->
                 <div class="card-front">
                     <div class="heart-cover">💝</div>
-                    <div class="cover-title">Gửi tới bông hoa đẹp nhấtttt💖🌷...</div>
-                    <div class="cover-text">
-                        Một tấm thiệp nhỏ<br>
-                        chứa đựng cả bầu trời iuu thưowngg<br>
-                        ✨🌙💫
-                    </div>
-                    <div class="open-hint">
-                        Mở ra nhé <i class="fas fa-arrow-right"></i>
-                    </div>
+                    <div class="cover-title">Gửi người con gái đặc biệt...</div>
+                    <div class="cover-text">Một tấm thiệp nhỏ<br>chứa đựng cả bầu trời yêu thương<br>✨🌙💫</div>
+                    <div class="open-hint">Mở ra nhé <i class="fas fa-arrow-right"></i></div>
                 </div>
-                
-                <!-- Mặt sau thiệp - HỘP QUÀ -->
                 <div class="card-back">
                     <div id="giftBox" class="gift-box">
-                        <!-- 4 icon tim đập trên box -->
-                        <div class="corner-heart corner-1">💞</div>
-                        <div class="corner-heart corner-2">💗</div>
-                        <div class="corner-heart corner-3">💖</div>
-                        <div class="corner-heart corner-4">💓</div>
-
-                        <div class="gift-icon">
-                            <i class="fas fa-gift"></i>
-                        </div>
-                        <h2>💓💗💞 Món quà siuu bất ngờ đâyyy 🌷💯🎊</h2>
-                        <div class="hint-text">
-                            💖 Bấm vào đâyy để mở điều đặc biệt nèe💖
-                        </div>
-                        <div style="margin-top: 20px; font-size: 2.2rem; color: #ff7b9c;">
-                            ✨ 💖 ✨
-                        </div>
+                        <div class="corner-heart corner-1">💞</div><div class="corner-heart corner-2">💗</div>
+                        <div class="corner-heart corner-3">💖</div><div class="corner-heart corner-4">💓</div>
+                        <div class="gift-icon"><i class="fas fa-gift"></i></div>
+                        <h2>💓💗💞 Món quà siu bất ngờ đâyyy 🌷💯🎊</h2>
+                        <div class="hint-text">💖 Bấm vào đây để mở điều đặc biệt 💖</div>
+                        <div style="margin-top:20px; font-size:2.2rem; color:#ff7b9c;">✨ 💖 ✨</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- HỘP LỜI CHÚC - NỀN HỒNG -->
         <div id="messageBox" class="message-box">
-            <!-- 4 icon tim đập trên box -->
-            <div class="corner-heart corner-1">💞</div>
-            <div class="corner-heart corner-2">💗</div>
-            <div class="corner-heart corner-3">💖</div>
-            <div class="corner-heart corner-4">💓</div>
-
-            <div class="message-header">
-                <span>🌷 8/3 vui vẻ nháa</span>
-                <span class="small-text">(my princess)</span>
-                <span>🌷</span>
-            </div>
-
-            <div class="typing-area">
-                <span id="typingLine" class="typing-line"></span>
-            </div>
-
+            <div class="corner-heart corner-1">💞</div><div class="corner-heart corner-2">💗</div>
+            <div class="corner-heart corner-3">💖</div><div class="corner-heart corner-4">💓</div>
+            <div class="message-header"><span>🌷 8/3 vui vẻ nháa</span><span class="small-text">(my princess)</span><span>🌷</span></div>
+            <div class="typing-area"><span id="typingLine" class="typing-line"></span></div>
             <div class="nav-controls">
                 <button class="nav-btn" id="prevBtn" onclick="prevMessage()" disabled><i class="fas fa-chevron-left"></i> Trước</button>
                 <button class="nav-btn" id="nextBtn" onclick="nextMessage()">Sau <i class="fas fa-chevron-right"></i></button>
             </div>
-
-            <div class="counter">
-                <span id="currentMsg">1</span>/<span id="totalMsg">18</span> 
-                <i class="fas fa-heart" style="color:#ff4365; margin-left: 8px;"></i>
-            </div>
+            <div class="counter"><span id="currentMsg">1</span>/<span id="totalMsg">18</span> <i class="fas fa-heart" style="color:#ff4365; margin-left:8px;"></i></div>
         </div>
     </div>
 
     <script>
-        // ================= DỮ LIỆU =================
         const messages = [
             "💞 Gửi ngàn yêu thương đến những bông hoa đẹp nhất!",
             "Chúc cậu ngày 8/3 thật vui vẻ, luôn xinh đẹp và tràn đầy năng lượng nhé 🌷✨",
             "Chúc cậu luôn tươi cười, học thật tốt và gặp nhiều may mắn 🍀💐",
             "Chúc cậu một ngày 8/3 thật hạnh phúc và nhận được nhiều điều bất ngờ 🎁💝",
             "Chúc cậu lúc nào cũng thật xinhh, đáng iuu và được mọi người yêu quý 💗💞",
-            "Chúc cậu luôn tự tin, mạnh mẽ và tỏa sáng theo cách riêng của chính mình 🌷💓💖
-                      "Chúc cậu ngày nào cũng vui vẻ như ngày 8/3 🌷🥰",
+            "Chúc cậu luôn tự tin, mạnh mẽ và tỏa sáng theo cách riêng của mình ✨🌸",
+            "Chúc cậu ngày nào cũng vui vẻ như ngày 8/3 🌷🥰",
             "Chúc cậu luôn giữ được nụ cười rạng rỡ và năng lượng tích cực 🌟✨💫",
             "Chúc cậu học tập thật tốt và đạt được những điều mình mong muốn 💯🎊",
             "Chúc cậu luôn được yêu thương và trân trọng 💕🌹",
@@ -651,304 +270,137 @@
             "Happy Women's dayyyy 🤟🏼🌷"
         ];
 
-        let currentIndex = 0;
-        let isTyping = false;
-        let typingInterval;
-        let hasFiredFireworks = false;
-        let cardOpened = false;
-        
-        const typingLine = document.getElementById('typingLine');
-        const card3d = document.getElementById('card3d');
-        const giftBox = document.getElementById('giftBox');
-        const messageBox = document.getElementById('messageBox');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const currentSpan = document.getElementById('currentMsg');
-        const totalSpan = document.getElementById('totalMsg');
+        let currentIndex = 0, isTyping = false, typingInterval, hasFiredFireworks = false, cardOpened = false;
+        const typingLine = document.getElementById('typingLine'), card3d = document.getElementById('card3d');
+        const giftBox = document.getElementById('giftBox'), messageBox = document.getElementById('messageBox');
+        const prevBtn = document.getElementById('prevBtn'), nextBtn = document.getElementById('nextBtn');
+        const currentSpan = document.getElementById('currentMsg'), totalSpan = document.getElementById('totalMsg');
         totalSpan.textContent = messages.length;
 
-        const iconList = [
-            '💓', '💖', '💗', '💞', 
-            '😉', '😚', '😘', 
-            '🎉', '💯', '🎊', 
-            '🌟', '✨', 
-            '🌷', '🌹', '🪷', '🌸', '🍁', '🌻', 
-            '🐱'
-        ];
+        const iconList = ['💓','💖','💗','💞','😉','😚','😘','🎉','💯','🎊','🌟','✨','🌷','🌹','🪷','🌸','🍁','🌻','🐱'];
+        const heartIcons = ['💓','💖','💗','💞','❤️','🧡','💛','💚','💙','💜','🤍','💕','💘','💝'];
 
-        const heartIcons = ['💓', '💖', '💗', '💞', '❤️', '🧡', '💛', '💚', '💙', '💜', '🤍', '💕', '💘', '💝'];
-
-        // ================= HÀM TẠO SAO BĂNG =================
-        function createShootingStars(count = 8) {
-            for (let i = 0; i < count; i++) {
-                setTimeout(() => {
-                    const star = document.createElement('div');
-                    star.className = 'shooting-star';
-                    
-                    const startX = Math.random() * window.innerWidth;
-                    const startY = Math.random() * window.innerHeight * 0.3;
-                    
-                    const angle = Math.random() * Math.PI / 3 - Math.PI / 6;
-                    const distance = 500 + Math.random() * 300;
-                    const tx = Math.cos(angle) * distance;
-                    const ty = Math.sin(angle) * distance;
-                    
-                    star.style.left = startX + 'px';
-                    star.style.top = startY + 'px';
-                    star.style.setProperty('--tx', tx + 'px');
-                    star.style.setProperty('--ty', ty + 'px');
-                    
-                    const colors = ['#ffd700', '#ffb6c1', '#ffffff', '#ffa500'];
-                    star.style.background = `linear-gradient(45deg, ${colors[Math.floor(Math.random() * colors.length)]}, #ffffff)`;
-                    
-                    document.getElementById('shooting-stars-container').appendChild(star);
-                    
-                    setTimeout(() => star.remove(), 2000);
-                }, i * 100);
-            }
+        function createShootingStars(count=8) {
+            for(let i=0; i<count; i++) setTimeout(() => {
+                const star = document.createElement('div'); star.className = 'shooting-star';
+                const startX = Math.random() * window.innerWidth, startY = Math.random() * window.innerHeight * 0.3;
+                const angle = Math.random() * Math.PI/3 - Math.PI/6, distance = 500 + Math.random()*300;
+                const tx = Math.cos(angle)*distance, ty = Math.sin(angle)*distance;
+                star.style.left = startX+'px'; star.style.top = startY+'px';
+                star.style.setProperty('--tx', tx+'px'); star.style.setProperty('--ty', ty+'px');
+                const colors = ['#ffd700','#ffb6c1','#ffffff','#ffa500'];
+                star.style.background = `linear-gradient(45deg, ${colors[Math.floor(Math.random()*colors.length)]}, #ffffff)`;
+                document.getElementById('shooting-stars-container').appendChild(star);
+                setTimeout(() => star.remove(), 2000);
+            }, i*100);
         }
 
-        // ================= HÀM MỞ THIỆP =================
-        function openCard(event) {
-            if (cardOpened) return;
-            cardOpened = true;
-            
-            card3d.classList.add('opened');
-            createShootingStars(12);
-            
-            event.stopPropagation();
+        function openCard(e) { 
+            if(!cardOpened) { 
+                cardOpened=true; 
+                card3d.classList.add('opened'); 
+                createShootingStars(12); 
+            } 
+            e.stopPropagation(); 
         }
 
-        // ================= HÀM MỞ QUÀ =================
-        function openGift(event) {
-            if (!cardOpened) return;
-            
-            createExplosionFromClick(event);
+        function openGift(e) { 
+            if(!cardOpened) return;
+            e.stopPropagation();
+            createExplosionFromClick(e); 
             createShootingStars(6);
-            
-            if (!isMusicPlaying) {
-                audio.play().then(() => {
-                    isMusicPlaying = true;
-                    musicIcon.className = 'fas fa-pause';
-                    musicBtn.classList.add('playing');
-                }).catch(e => console.log("Không thể phát nhạc:", e));
-            }
-            
-            setTimeout(() => {
-                card3d.style.display = 'none';
-                messageBox.style.display = 'block';
-                if (!isTyping) {
-                    typeMessage(messages[currentIndex]);
-                }
-                updateCounterAndButtons();
-            }, 400);
+            if(!isMusicPlaying) audio.play().then(()=>{ isMusicPlaying=true; musicIcon.className='fas fa-pause'; musicBtn.classList.add('playing'); }).catch(e=>console.log(e));
+            setTimeout(()=>{ 
+                card3d.style.display='none'; 
+                messageBox.style.display='block'; 
+                if(!isTyping) typeMessage(messages[currentIndex]); 
+                updateCounterAndButtons(); 
+            },400);
         }
 
-        // ================= HÀM TẠO NỔ ICON =================
-        function createExplosionFromClick(event) {
-            const x = event.clientX;
-            const y = event.clientY;
-            
-            for (let i = 0; i < 60; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'explosion-particle';
-                particle.textContent = iconList[Math.floor(Math.random() * iconList.length)];
-                
-                const size = Math.floor(Math.random() * 10) + 16;
-                particle.style.fontSize = size + 'px';
-                
-                const colors = ['#ff1744', '#ff4081', '#f50057', '#ff5e7d', '#ff8a80', '#ff80ab', '#ea80fc'];
-                particle.style.color = colors[Math.floor(Math.random() * colors.length)];
-                
-                particle.style.left = x + 'px';
-                particle.style.top = y + 'px';
-                
-                const angle = Math.random() * Math.PI * 2;
-                const distance = Math.random() * 250 + 150;
-                const tx = Math.cos(angle) * distance;
-                const ty = Math.sin(angle) * distance;
-                
-                particle.style.setProperty('--tx', tx + 'px');
-                particle.style.setProperty('--ty', ty + 'px');
-                
-                const duration = Math.random() * 0.8 + 0.8;
-                particle.style.animationDuration = duration + 's';
-                
-                document.getElementById('explosion-container').appendChild(particle);
-                
-                setTimeout(() => {
-                    if (particle.parentNode) particle.remove();
-                }, duration * 1200);
+        function createExplosionFromClick(e) {
+            const x = e.clientX, y = e.clientY;
+            for(let i=0; i<60; i++) {
+                const p = document.createElement('div'); p.className = 'explosion-particle';
+                p.textContent = iconList[Math.floor(Math.random()*iconList.length)];
+                p.style.fontSize = (Math.floor(Math.random()*10)+16)+'px';
+                const colors = ['#ff1744','#ff4081','#f50057','#ff5e7d','#ff8a80','#ff80ab','#ea80fc'];
+                p.style.color = colors[Math.floor(Math.random()*colors.length)];
+                p.style.left = x+'px'; p.style.top = y+'px';
+                const angle = Math.random()*Math.PI*2, distance = Math.random()*250+150;
+                const tx = Math.cos(angle)*distance, ty = Math.sin(angle)*distance;
+                p.style.setProperty('--tx', tx+'px'); p.style.setProperty('--ty', ty+'px');
+                p.style.animationDuration = (Math.random()*0.8+0.8)+'s';
+                document.getElementById('explosion-container').appendChild(p);
+                setTimeout(()=> p.remove(), 2000);
             }
         }
 
-        // ================= HÀM TẠO PHÁO HOA =================
-        function createSingleHeartFirework(offsetX = 0, offsetY = 0, scaleSize = 14) {
-            const container = document.getElementById('fireworks-container');
-            
-            const centerX = window.innerWidth / 2 + offsetX;
-            const centerY = window.innerHeight / 2 + offsetY;
-            
-            const particleCount = 40;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'firework-particle';
-                particle.textContent = heartIcons[Math.floor(Math.random() * heartIcons.length)];
-                
-                const size = Math.floor(Math.random() * 6) + 8;
-                particle.style.fontSize = size + 'px';
-                
-                const colors = ['#ff1744', '#ff4081', '#f50057', '#ff5e7d', '#ff8a80', '#ff80ab', '#ea80fc'];
-                particle.style.color = colors[Math.floor(Math.random() * colors.length)];
-                
-                particle.style.left = centerX + 'px';
-                particle.style.top = centerY + 'px';
-                
-                const t = (i / particleCount) * Math.PI * 2;
-                const scale = scaleSize;
-                const variation = 0.9 + Math.random() * 0.2;
-                
-                const x = 16 * Math.pow(Math.sin(t), 3) * scale * variation;
-                const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t)) * scale * variation;
-                
-                const randomOffset = 2;
-                const tx = x + (Math.random() - 0.5) * randomOffset;
-                const ty = y + (Math.random() - 0.5) * randomOffset;
-                
-                particle.style.setProperty('--tx', tx + 'px');
-                particle.style.setProperty('--ty', ty + 'px');
-                
-                const duration = Math.random() * 0.8 + 1.0;
-                particle.style.animationDuration = duration + 's';
-                
-                container.appendChild(particle);
-                
-                setTimeout(() => {
-                    if (particle.parentNode) particle.remove();
-                }, duration * 1300);
+        function createSingleHeartFirework(ox=0, oy=0, scale=14) {
+            const cx = window.innerWidth/2+ox, cy = window.innerHeight/2+oy;
+            for(let i=0; i<40; i++) {
+                const p = document.createElement('div'); p.className = 'firework-particle';
+                p.textContent = heartIcons[Math.floor(Math.random()*heartIcons.length)];
+                p.style.fontSize = (Math.floor(Math.random()*6)+8)+'px';
+                const colors = ['#ff1744','#ff4081','#f50057','#ff5e7d','#ff8a80','#ff80ab','#ea80fc'];
+                p.style.color = colors[Math.floor(Math.random()*colors.length)];
+                p.style.left = cx+'px'; p.style.top = cy+'px';
+                const t = (i/40)*Math.PI*2, v = 0.9+Math.random()*0.2;
+                const x = 16*Math.pow(Math.sin(t),3)*scale*v;
+                const y = -(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t))*scale*v;
+                p.style.setProperty('--tx', (x+(Math.random()-0.5)*2)+'px');
+                p.style.setProperty('--ty', (y+(Math.random()-0.5)*2)+'px');
+                p.style.animationDuration = (Math.random()*0.8+1.0)+'s';
+                document.getElementById('fireworks-container').appendChild(p);
+                setTimeout(()=> p.remove(), 2000);
             }
         }
 
-        // ================= HÀM BẮN PHÁO HOA =================
         function launchFireworks() {
-            if (hasFiredFireworks) return;
-            hasFiredFireworks = true;
-            
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-            
-            setTimeout(() => {
-                createSingleHeartFirework(-width/4, -height/4, 13);
-                createSingleHeartFirework(width/4, -height/4, 13);
-                createSingleHeartFirework(0, -height/6, 14);
-            }, 200);
-            
-            setTimeout(() => {
-                createSingleHeartFirework(-width/5, height/5, 12);
-                createSingleHeartFirework(width/5, height/5, 12);
-                createSingleHeartFirework(0, height/6, 13);
-            }, 700);
-            
-            setTimeout(() => {
-                createSingleHeartFirework(-width/3, -height/3, 14);
-                createSingleHeartFirework(width/3, -height/3, 14);
-                createSingleHeartFirework(-width/3, height/3, 14);
-                createSingleHeartFirework(width/3, height/3, 14);
-            }, 1200);
-            
-            setTimeout(() => {
-                createSingleHeartFirework(-width/6, 0, 15);
-                createSingleHeartFirework(width/6, 0, 15);
-                createSingleHeartFirework(0, 0, 16);
-            }, 1700);
-            
-            setTimeout(() => {
-                createSingleHeartFirework(-width/8, -height/8, 18);
-                createSingleHeartFirework(width/8, height/8, 18);
-            }, 2200);
-            
-            setTimeout(() => {
-                createSingleHeartFirework(width/8, -height/8, 17);
-                createSingleHeartFirework(-width/8, height/8, 17);
-            }, 2700);
+            if(hasFiredFireworks) return; hasFiredFireworks=true;
+            const w=window.innerWidth, h=window.innerHeight;
+            setTimeout(()=>{ createSingleHeartFirework(-w/4,-h/4,13); createSingleHeartFirework(w/4,-h/4,13); createSingleHeartFirework(0,-h/6,14); },200);
+            setTimeout(()=>{ createSingleHeartFirework(-w/5,h/5,12); createSingleHeartFirework(w/5,h/5,12); createSingleHeartFirework(0,h/6,13); },700);
+            setTimeout(()=>{ createSingleHeartFirework(-w/3,-h/3,14); createSingleHeartFirework(w/3,-h/3,14); createSingleHeartFirework(-w/3,h/3,14); createSingleHeartFirework(w/3,h/3,14); },1200);
+            setTimeout(()=>{ createSingleHeartFirework(-w/6,0,15); createSingleHeartFirework(w/6,0,15); createSingleHeartFirework(0,0,16); },1700);
+            setTimeout(()=>{ createSingleHeartFirework(-w/8,-h/8,18); createSingleHeartFirework(w/8,h/8,18); },2200);
+            setTimeout(()=>{ createSingleHeartFirework(w/8,-h/8,17); createSingleHeartFirework(-w/8,h/8,17); },2700);
         }
 
-        // ================= HÀM TYPING =================
-        function typeMessage(fullText) {
-            if (typingInterval) clearInterval(typingInterval);
-            let i = 0;
-            typingLine.textContent = '';
-            isTyping = true;
-
-            typingInterval = setInterval(() => {
-                if (i < fullText.length) {
-                    typingLine.textContent += fullText.charAt(i);
-                    i++;
-                } else {
-                    clearInterval(typingInterval);
-                    isTyping = false;
-                    
-                    if (currentIndex === messages.length - 1 && !hasFiredFireworks) {
-                        launchFireworks();
-                    }
-                }
-            }, 50);
+        function typeMessage(text) {
+            if(typingInterval) clearInterval(typingInterval);
+            let i=0; typingLine.textContent=''; isTyping=true;
+            typingInterval = setInterval(()=>{
+                if(i<text.length) typingLine.textContent += text.charAt(i++);
+                else { clearInterval(typingInterval); isTyping=false; if(currentIndex===messages.length-1 && !hasFiredFireworks) launchFireworks(); }
+            },50);
         }
 
-        // ================= CHUYỂN CÂU =================
-        function prevMessage() {
-            if (currentIndex > 0 && !isTyping) {
-                currentIndex--;
-                typeMessage(messages[currentIndex]);
-                updateCounterAndButtons();
-            }
-        }
+        function prevMessage() { if(currentIndex>0 && !isTyping) { currentIndex--; typeMessage(messages[currentIndex]); updateCounterAndButtons(); } }
+        function nextMessage() { if(currentIndex<messages.length-1 && !isTyping) { currentIndex++; typeMessage(messages[currentIndex]); updateCounterAndButtons(); } }
+        function updateCounterAndButtons() { currentSpan.textContent=currentIndex+1; prevBtn.disabled=(currentIndex===0); nextBtn.disabled=(currentIndex===messages.length-1); }
 
-        function nextMessage() {
-            if (currentIndex < messages.length - 1 && !isTyping) {
-                currentIndex++;
-                typeMessage(messages[currentIndex]);
-                updateCounterAndButtons();
-            }
-        }
-
-        function updateCounterAndButtons() {
-            currentSpan.textContent = currentIndex + 1;
-            prevBtn.disabled = (currentIndex === 0);
-            nextBtn.disabled = (currentIndex === messages.length - 1);
-        }
-
-        // ================= HÀM ĐIỀU KHIỂN NHẠC =================
-        const audio = document.getElementById('bgMusic');
-        const musicBtn = document.getElementById('musicBtn');
-        const musicIcon = document.getElementById('musicIcon');
+        const audio = document.getElementById('bgMusic'), musicBtn = document.getElementById('musicBtn'), musicIcon = document.getElementById('musicIcon');
         let isMusicPlaying = false;
-
         function toggleMusic() {
-            if (isMusicPlaying) {
-                audio.pause();
-                musicIcon.className = 'fas fa-play';
-                musicBtn.classList.remove('playing');
-            } else {
-                audio.play().catch(e => console.log("Không thể phát nhạc:", e));
-                musicIcon.className = 'fas fa-pause';
-                musicBtn.classList.add('playing');
-            }
+            if(isMusicPlaying) { audio.pause(); musicIcon.className='fas fa-play'; musicBtn.classList.remove('playing'); }
+            else { audio.play().catch(e=>console.log(e)); musicIcon.className='fas fa-pause'; musicBtn.classList.add('playing'); }
             isMusicPlaying = !isMusicPlaying;
         }
-
         audio.volume = 0.4;
 
-        // ================= KHỞI TẠO ICON RƠI =================
-        window.addEventListener('load', () => {
-            setInterval(createRainIcon, 300);
-            for (let i = 0; i < 15; i++) {
-                setTimeout(createRainIcon, i * 150);
-            }
-        });
+        function createRainIcon() {
+            const c=document.getElementById('rain-container'); if(!c) return;
+            const i=document.createElement('div'); i.className='rain-icon';
+            i.textContent=iconList[Math.floor(Math.random()*iconList.length)];
+            i.style.fontSize=(Math.floor(Math.random()*10)+14)+'px'; i.style.left=Math.random()*100+'%';
+            i.style.animationDuration=(Math.random()*5+5)+'s'; i.style.animationDelay=Math.random()*3+'s';
+            const colors=['#ff6b8b','#ff7b9c','#ff8aa8','#ff99b5','#ffa8c2'];
+            i.style.color=colors[Math.floor(Math.random()*colors.length)];
+            c.appendChild(i); setTimeout(()=> i.remove(), 10000);
+        }
 
-        // Gán sự kiện click cho gift box
+        window.addEventListener('load', ()=>{ setInterval(createRainIcon,300); for(let i=0;i<15;i++) setTimeout(createRainIcon,i*150); });
         giftBox.addEventListener('click', openGift);
     </script>
 </body>
